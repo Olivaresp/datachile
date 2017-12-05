@@ -6,6 +6,7 @@ import { Section } from "datawheel-canon";
 import { numeral, moneyRangeFormat } from "helpers/formatters";
 import { simpleGeoChartNeed } from "helpers/MondrianClient";
 import { COLORS_GENDER } from "helpers/colors";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -84,7 +85,7 @@ class IncomeBySex extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/sex/" + d["ID Sex"] + ".png"
+                  asset_url("/images/legend/sex/" + d["ID Sex"] + ".png")
               }
             }
           }}

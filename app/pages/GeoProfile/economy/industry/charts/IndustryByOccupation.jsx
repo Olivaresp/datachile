@@ -7,6 +7,7 @@ import { ordinalColorScale } from "helpers/colors";
 import { translate } from "react-i18next";
 import { Section } from "datawheel-canon";
 import Select from "components/Select";
+import { asset_url } from "helpers/url";
 
 class IndustryByOccupation extends Section {
   static need = [
@@ -134,7 +135,8 @@ class IndustryByOccupation extends Section {
               shapeConfig: {
                 width: 20,
                 height: 20,
-                backgroundImage: d => "/images/legend/occupation/occupation.png"
+                backgroundImage: d =>
+                  asset_url("/images/legend/occupation/occupation.png")
               }
             }
           }}

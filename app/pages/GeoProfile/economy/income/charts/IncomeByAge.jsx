@@ -6,6 +6,7 @@ import { translate } from "react-i18next";
 import { simpleGeoChartNeed } from "helpers/MondrianClient";
 import { ordinalColorScale } from "helpers/colors";
 import { numeral, moneyRangeFormat } from "helpers/formatters";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -83,7 +84,8 @@ class IncomeByAge extends Section {
               shapeConfig: {
                 width: 40,
                 height: 40,
-                backgroundImage: () => "/images/legend/occupation/person.png"
+                backgroundImage: () =>
+                  asset_url("/images/legend/occupation/person.png")
               }
             }
           }}

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router";
 import { translate } from "react-i18next";
-import { FORMATTERS } from "helpers/formatters";
 
 import "./LinksList.css";
 
@@ -62,4 +60,4 @@ class LinksList extends Component {
   }
 }
 
-export default translate()(connect(state => ({}), {})(LinksList));
+export default translate()(LinksList);

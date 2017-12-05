@@ -10,6 +10,7 @@ import mondrianClient, {
   levelCut
 } from "helpers/MondrianClient";
 import { getLevelObject, ingestParent } from "helpers/dataUtils";
+import { asset_url } from "helpers/url";
 
 import Nav from "components/Nav";
 import SvgImage from "components/SvgImage";
@@ -288,7 +289,9 @@ class CareerProfile extends Component {
 
             <div className="arrow-container">
               <a href="#about">
-                <SvgImage src="/images/profile-icon/icon-arrow.svg" />
+                <SvgImage
+                  src={asset_url("/images/profile-icon/icon-arrow.svg")}
+                />
               </a>
             </div>
           </div>

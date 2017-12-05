@@ -7,6 +7,7 @@ import mondrianClient, { geoCut } from "helpers/MondrianClient";
 import { getGeoObject } from "helpers/dataUtils";
 import { educationLevelColorScale } from "helpers/colors";
 import { numeral } from "helpers/formatters";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -98,7 +99,8 @@ class EmploymentByLevel extends Section {
               shapeConfig: {
                 width: 40,
                 height: 40,
-                backgroundImage: () => "/images/legend/college/hat.png"
+                backgroundImage: () =>
+                  asset_url("/images/legend/college/hat.png")
               }
             }
           }}

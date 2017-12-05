@@ -3,16 +3,13 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { Link, browserHistory } from "react-router";
 import { translate } from "react-i18next";
-import { text as loadSvgAsString, request as d3Request } from "d3-request";
-import { Geomap } from "d3plus-react";
-import { select, selectAll, event, mouse } from "d3-selection";
+import { request as d3Request } from "d3-request";
+import { select, selectAll } from "d3-selection";
 
+import { asset_url } from "helpers/url";
 import { numeral, slugifyItem } from "helpers/formatters";
 import mondrianClient, { setLangCaptions } from "helpers/MondrianClient";
 import SVGCache from "helpers/svg";
-import { FORMATTERS } from "helpers/formatters";
-
-import SvgImage from "components/SvgImage";
 
 import "./DynamicHomeHeader.css";
 
@@ -225,7 +222,6 @@ class DynamicHomeHeader extends Component {
   }
 
   callbackSvg(error, response, src) {
-    const { header, data } = this.props;
     var xml = response.responseText ? response.responseText : response;
     var that = this;
     if (!xml.startsWith("<?xml")) {
@@ -474,7 +470,7 @@ class DynamicHomeHeader extends Component {
 
   loadHeader(header) {
     if (typeof document != "undefined" && header) {
-      const src = "/images/home/hotspots/" + header.slug + ".svg";
+      const src = asset_url("/images/home/hotspots/" + header.slug + ".svg");
       const cb = this.callbackSvg;
       var cached = this.cache.getSvg(src);
       /*select(".dynamic-home-hotspots")
@@ -552,7 +548,9 @@ class DynamicHomeHeader extends Component {
                 dangerouslySetInnerHTML={{ __html: this.state.illustration }}
               />
               <div className={`dynamic-home-image`}>
-                <img src={`/images/home/headers/${header.slug}.png`} />
+                <img
+                  src={asset_url(`/images/home/headers/${header.slug}.png`)}
+                />
               </div>
             </div>
           )}

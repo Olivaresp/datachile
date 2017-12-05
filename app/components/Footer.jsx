@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { translate } from "react-i18next";
+
+import { asset_url } from "helpers/url";
+
 import "./Footer.css";
 
 class Footer extends Component {
@@ -17,16 +20,28 @@ class Footer extends Component {
           <div className="logos">
             <img
               className="logo-datawheel"
-              src="/images/logos/logo-datawheel.png"
+              src={asset_url("/images/logos/logo-datawheel.png")}
             />
             <img
               className="logo"
-              src="/images/logos/logo-antofagasta-minerals.svg"
+              src={asset_url("/images/logos/logo-antofagasta-minerals.svg")}
             />
-            <img className="logo" src="/images/logos/logo-asech.svg" />
-            <img className="logo" src="/images/logos/logo-corfo.svg" />
-            <img className="logo" src="/images/logos/logo-minecon.png" />
-            <img className="logo" src="/images/logos/logo-direcon.png" />
+            <img
+              className="logo"
+              src={asset_url("/images/logos/logo-asech.svg")}
+            />
+            <img
+              className="logo"
+              src={asset_url("/images/logos/logo-corfo.svg")}
+            />
+            <img
+              className="logo"
+              src={asset_url("/images/logos/logo-minecon.png")}
+            />
+            <img
+              className="logo"
+              src={asset_url("/images/logos/logo-direcon.png")}
+            />
           </div>
 
           <div className="nav-links">

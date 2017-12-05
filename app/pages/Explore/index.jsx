@@ -13,6 +13,7 @@ import Nav from "components/Nav";
 import Search from "components/Search";
 import FeaturedBox from "components/FeaturedBox";
 import ResultsElement from "./results";
+import { asset_url } from "helpers/url";
 
 import "./explore.css";
 
@@ -188,7 +189,7 @@ class Explore extends Component {
     const members = this.props.data.members;
 
     var type = "";
-    var mainLink = false;
+
     switch (entity) {
       case undefined: {
         type = "";
@@ -216,7 +217,6 @@ class Explore extends Component {
       }
       case "geo": {
         type = "geo";
-        mainLink = true;
         break;
       }
       default: {
@@ -232,7 +232,7 @@ class Explore extends Component {
               name: m.caption,
               type: type,
               url: "/explore/" + type + "/" + m.key + "#results",
-              img: "/images/profile-bg/geo/chile.jpg"
+              img: asset_url("/images/profile-bg/geo/chile.jpg")
             };
           })
         : [];
@@ -261,37 +261,43 @@ class Explore extends Component {
                 <ul>
                   <li className={type == "geo" ? "selected" : ""}>
                     <Link className="link" to="/explore/geo">
-                      <img src="/images/icons/icon-geo.svg" />
+                      <img src={asset_url("/images/icons/icon-geo.svg")} />
                       <span>{t("Geo")}</span>
                     </Link>
                   </li>
                   <li className={type == "countries" ? "selected" : ""}>
                     <Link className="link" to="/explore/countries">
-                      <img src="/images/icons/icon-countries.svg" />
+                      <img
+                        src={asset_url("/images/icons/icon-countries.svg")}
+                      />
                       <span>{t("Countries")}</span>
                     </Link>
                   </li>
                   <li className={type == "institutions" ? "selected" : ""}>
                     <Link className="link" to="/explore/institutions">
-                      <img src="/images/icons/icon-institutions.svg" />
+                      <img
+                        src={asset_url("/images/icons/icon-institutions.svg")}
+                      />
                       <span>{t("Institutions")}</span>
                     </Link>
                   </li>
                   <li className={type == "careers" ? "selected" : ""}>
                     <Link className="link" to="/explore/careers">
-                      <img src="/images/icons/icon-careers.svg" />
+                      <img src={asset_url("/images/icons/icon-careers.svg")} />
                       <span>{t("Careers")}</span>
                     </Link>
                   </li>
                   <li className={type == "products" ? "selected" : ""}>
                     <Link className="link" to="/explore/products">
-                      <img src="/images/icons/icon-products.svg" />
+                      <img src={asset_url("/images/icons/icon-products.svg")} />
                       <span>{t("Products")}</span>
                     </Link>
                   </li>
                   <li className={type == "industries" ? "selected" : ""}>
                     <Link className="link" to="/explore/industries">
-                      <img src="/images/icons/icon-industries.svg" />
+                      <img
+                        src={asset_url("/images/icons/icon-industries.svg")}
+                      />
                       <span>{t("Industries")}</span>
                     </Link>
                   </li>

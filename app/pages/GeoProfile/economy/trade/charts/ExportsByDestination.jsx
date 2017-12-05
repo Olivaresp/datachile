@@ -8,6 +8,7 @@ import { continentColorScale } from "helpers/colors";
 import { numeral, slugifyItem } from "helpers/formatters";
 import { simpleGeoChartNeed } from "helpers/MondrianClient";
 import { getGeoObject } from "helpers/dataUtils";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -83,7 +84,7 @@ class ExportsByDestination extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  asset_url("/images/legend/continent/" + d["ID Continent"] + ".png")
               }
             }
           }}

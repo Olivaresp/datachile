@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { translate } from "react-i18next";
 
+import { asset_url } from "helpers/url";
+
 import "./ExportLink.css";
 
 class ExportLink extends React.Component {
@@ -52,7 +54,7 @@ class ExportLink extends React.Component {
         ref={this.containerRef}
       >
         <a className="toggle" onClick={this.toggleMenu}>
-          <img src={`/images/icons/icon-download.svg`} />
+          <img src={asset_url("/images/icons/icon-download.svg")} />
         </a>
         <ul>
           {options.map(o => (

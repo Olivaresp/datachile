@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router";
-import Slider from "react-slick";
 import SvgImage from "components/SvgImage";
+import { asset_url } from "helpers/url";
 import "./TopicMenu.css";
 
 class TopicMenu extends Component {
@@ -12,7 +11,9 @@ class TopicMenu extends Component {
       <div id="topic-profile-menu" className="topic-menu">
         {topics.map(topic => (
           <a key={topic.slug} className="topic-link" href={`#${topic.slug}`}>
-            <SvgImage src={`/images/profile-icon/icon-${topic.slug}.svg`} />
+            <SvgImage
+              src={asset_url(`/images/profile-icon/icon-${topic.slug}.svg`)}
+            />
             <span>{topic.title}</span>
           </a>
         ))}

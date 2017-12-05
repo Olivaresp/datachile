@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router";
 import { translate } from "react-i18next";
-import { FORMATTERS } from "helpers/formatters";
 import SvgImage from "components/SvgImage";
+
+import { asset_url } from "helpers/url";
 
 import "./FeaturedDatum.css";
 
@@ -14,7 +13,7 @@ class FeaturedDatum extends Component {
     return (
       <div className={"featured-datum " + className}>
         <div className="featured-datum-icon">
-          <SvgImage src={`/images/slider-icon/icon-${icon}.svg`} />
+          <SvgImage src={asset_url(`/images/slider-icon/icon-${icon}.svg`)} />
         </div>
         <div className="featured-datum-text">
           <p className="featured-datum-data">{datum}</p>
@@ -26,4 +25,4 @@ class FeaturedDatum extends Component {
   }
 }
 
-export default translate()(connect(state => ({}), {})(FeaturedDatum));
+export default translate()(FeaturedDatum);

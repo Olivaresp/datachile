@@ -7,6 +7,7 @@ import { BarChart } from "d3plus-react";
 import { continentColorScale } from "helpers/colors";
 import { simpleGeoChartNeed } from "helpers/MondrianClient";
 import { numeral } from "helpers/formatters";
+import { asset_url } from "helpers/url";
 
 class MigrationByVisa extends Section {
   static need = [
@@ -77,7 +78,9 @@ class MigrationByVisa extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  asset_url(
+                    "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  )
               }
             }
           }}

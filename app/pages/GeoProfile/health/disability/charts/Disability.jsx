@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Section } from "datawheel-canon";
 import { Treemap } from "d3plus-react";
 import { translate } from "react-i18next";
@@ -6,7 +6,7 @@ import { translate } from "react-i18next";
 import mondrianClient, { geoCut } from "helpers/MondrianClient";
 import { getGeoObject } from "helpers/dataUtils";
 import { ordinalColorScale } from "helpers/colors";
-import { numeral } from "helpers/formatters";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -72,7 +72,7 @@ class Disability extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/college/administration.png"
+                  asset_url("/images/legend/college/administration.png")
               }
             }
           }}

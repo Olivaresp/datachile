@@ -7,6 +7,7 @@ import mondrianClient, { geoCut } from "helpers/MondrianClient";
 import { getGeoObject } from "helpers/dataUtils";
 import { COLORS_GENDER } from "helpers/colors";
 import { numeral } from "helpers/formatters";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -86,7 +87,7 @@ export default translate()(
                   width: 40,
                   height: 40,
                   backgroundImage: d =>
-                    "/images/legend/sex/" + d["ID Sex"] + ".png"
+                    asset_url("/images/legend/sex/" + d["ID Sex"] + ".png")
                 }
               }
             }}

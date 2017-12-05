@@ -6,7 +6,8 @@ import { SubNav } from "datawheel-canon";
 
 import NavFixed from "components/NavFixed";
 import Search from "components/Search";
-import { slugifyItem } from "helpers/formatters";
+
+import { asset_url } from "helpers/url";
 
 import "./Nav.css";
 
@@ -67,21 +68,8 @@ class Nav extends Component {
 
     const search_icon = search_visible ? "icon-close" : "icon-search";
 
-    var canUseDOM = !!(
-      typeof window !== "undefined" &&
-      window.document &&
-      window.document.createElement
-    );
-
-    //disgusting code, just to trigger the menu on subnav canon. Remove when is fixed
-    if (canUseDOM) {
-      setTimeout(function() {
-        window.dispatchEvent(new Event("scroll"));
-      }, 100);
-    }
-
     var url = location.href;
-    if (canUseDOM) {
+    if (!__SERVER__) {
       url = window.location.href;
     }
     url = url.replace(locale, otherLang);
@@ -98,7 +86,7 @@ class Nav extends Component {
             <div className="close-btn-container">
               <div className="menu-button">
                 <a onClick={this.toggleSubNav}>
-                  <img src="/images/icons/icon-close.svg" />
+                  <img src={asset_url("/images/icons/icon-close.svg")} />
                 </a>
               </div>
             </div>
@@ -144,14 +132,14 @@ class Nav extends Component {
             <div className="l-col">
               <div className="menu-button">
                 <a onClick={this.toggleSubNav}>
-                  <img src="/images/icons/icon-menu.svg" />
+                  <img src={asset_url("/images/icons/icon-menu.svg")} />
                 </a>
               </div>
             </div>
 
             <div className="c-col">
               <Link className="logo" to="/">
-                <img src="/images/logos/logo-datachile.png" />
+                <img src={asset_url("/images/logos/logo-datachile.png")} />
               </Link>
             </div>
 
@@ -165,7 +153,7 @@ class Nav extends Component {
                   <Search className="search-nav" />
                 </div>
                 <a className="search-toggle-nav" onClick={this.toggleSearch}>
-                  <img src={`/images/icons/${search_icon}.svg`} />
+                  <img src={asset_url(`/images/icons/${search_icon}.svg`)} />
                 </a>
               </div>
             </div>
@@ -183,7 +171,7 @@ class Nav extends Component {
                           <span className="icon-container">
                             <img
                               className="icon"
-                              src={`/images/icons/icon-${type}.svg`}
+                              src={asset_url(`/images/icons/icon-${type}.svg`)}
                             />
                           </span>
                         )}

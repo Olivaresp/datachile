@@ -50,15 +50,6 @@ class SvgImage extends Component {
     }
   }
 
-  /*componentWillReceiveProps(nextProps) {
-    if (nextProps.slug !== this.props.slug) {
-      loadSvgAsString('/images/maps/zoom/'+nextProps.slug+'.svg').get(this.callbackSvg);
-    }
-    if (nextProps.active !== this.props.active) {
-      this.prepareSelected(nextProps.active);
-    }
-  };*/
-
   render() {
     const { t, extraClass } = this.props;
 

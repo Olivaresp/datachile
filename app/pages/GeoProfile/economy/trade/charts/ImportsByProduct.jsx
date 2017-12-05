@@ -7,8 +7,7 @@ import { browserHistory } from "react-router";
 import { simpleGeoChartNeed } from "helpers/MondrianClient";
 import { numeral, slugifyItem } from "helpers/formatters";
 import { productsColorScale } from "helpers/colors";
-import { getGeoObject } from "helpers/dataUtils";
-import { trade_by_time_and_product } from "helpers/aggregations";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -43,7 +42,8 @@ class ImportsByProduct extends Section {
             total: d => d["CIF US"],
             totalConfig: {
               text: d =>
-                "Total: " + numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
+                "Total: " +
+                numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
             },
             legendConfig: {
               label: false,
@@ -52,7 +52,7 @@ class ImportsByProduct extends Section {
                 height: 25,
                 fill: d => productsColorScale("hs" + d["ID HS0"]),
                 backgroundImage: d =>
-                  "/images/legend/hs/hs_" + d["ID HS0"] + ".png"
+                  asset_url("/images/legend/hs/hs_" + d["ID HS0"] + ".png")
               }
             },
             shapeConfig: {

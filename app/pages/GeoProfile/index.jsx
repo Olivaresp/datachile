@@ -7,6 +7,7 @@ import { translate } from "react-i18next";
 import { selectAll } from "d3-selection";
 
 import d3plus from "helpers/d3plus";
+import { asset_url } from "helpers/url";
 import { numeral, slugifyItem } from "helpers/formatters";
 import { getGeoObject } from "helpers/dataUtils";
 
@@ -378,7 +379,9 @@ class GeoProfile extends Component {
               <div
                 className="image"
                 style={{
-                  backgroundImage: `url('/images/profile-bg/geo/${geoObj.image}')`
+                  backgroundImage: `url(${asset_url(
+                    "/images/profile-bg/geo/" + geoObj.images
+                  )})`
                 }}
               />
               <div className="gradient" />

@@ -1,7 +1,7 @@
+/* global __SERVER__, setTimeout, Event */
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link, browserHistory } from "react-router";
 import Slider from "react-slick";
+import _ from "lodash";
 import { translate } from "react-i18next";
 import "./TopicSlider.css";
 import "../../node_modules/slick-carousel/slick/slick.css";
@@ -15,32 +15,19 @@ class TopicSlider extends Component {
   }
 
   render() {
-    const { children, selected, goTo } = this.props;
+    const { children, selected } = this.props;
 
-    const afterChange = d => {
+    const afterChange = () => {
       if (this.state.chartsRendered) return;
-      var canUseDOM = !!(
-        typeof window !== "undefined" &&
-        window.document &&
-        window.document.createElement
-      );
 
       //disgusting code, just to trigger the new slide's charts render (d3plus).
-      if (canUseDOM) {
+      if (!__SERVER__) {
         setTimeout(() => {
+          _.times(10, () => window.dispatchEvent(new Event("scroll")));
           window.dispatchEvent(new Event("scroll"));
-          this.state.chartsRendered = true;
+          this.setState({ chartsRendered: true });
         }, 100);
       }
-    };
-
-    const beforeChange = d => {
-      //goTo(d);
-      //console.log("beforeChange", browserHistory.getCurrentLocation());
-      //browserHistory.replace({ search: "?slide=" + d });
-      /*browserHistory.push(
-        browserHistory.getCurrentLocation().pathname + "#" + d
-      );*/
     };
 
     var settings = {
@@ -57,7 +44,6 @@ class TopicSlider extends Component {
       <div className="topic-slider">
         <Slider
           {...settings}
-          ref="topicSlider"
           slickGoTo={selected}
           afterChange={afterChange}
           /* beforeChange={beforeChange} */

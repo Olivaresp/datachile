@@ -9,11 +9,8 @@ import { request } from "d3-request";
 
 import "./Search.css";
 
-import { GEOARRAY } from "helpers/GeoData";
 import { slugifyItem } from "helpers/formatters";
-
-import { strip } from "d3plus-text";
-import { dataFold } from "d3plus-viz";
+import { asset_url } from "helpers/url";
 
 class Search extends Component {
   constructor(props) {
@@ -198,7 +195,7 @@ class Search extends Component {
                 <span className="icon-container">
                   <img
                     className="icon"
-                    src={`/images/icons/icon-${result.index_as}.svg`}
+                    src={asset_url(`/images/icons/icon-${result.index_as}.svg`)}
                   />
                 </span>
                 <span className="content">{result.content}</span>

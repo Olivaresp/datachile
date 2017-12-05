@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router";
 import { translate } from "react-i18next";
 import Shiitake from "shiitake";
-import { FORMATTERS } from "helpers/formatters";
+
+import { asset_url } from "helpers/url";
 
 import "./FeaturedBox.css";
 
@@ -29,7 +30,10 @@ class FeaturedBox extends Component {
         <span className="tile-filter" />
         <span className="col-l">
           <span className="icon-container">
-            <img className="icon" src={`/images/icons/icon-${icon}.svg`} />
+            <img
+              className="icon"
+              src={asset_url(`/images/icons/icon-${icon}.svg`)}
+            />
           </span>
           <Shiitake tagName="span" className="name" lines={4}>
             {item.name}
@@ -43,4 +47,4 @@ class FeaturedBox extends Component {
   }
 }
 
-export default translate()(connect(state => ({}), {})(FeaturedBox));
+export default translate()(FeaturedBox);

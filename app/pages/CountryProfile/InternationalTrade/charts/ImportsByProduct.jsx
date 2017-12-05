@@ -8,6 +8,7 @@ import mondrianClient, { levelCut } from "helpers/MondrianClient";
 import { numeral, slugifyItem } from "helpers/formatters";
 import { productsColorScale } from "helpers/colors";
 import { getLevelObject } from "helpers/dataUtils";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -72,7 +73,7 @@ class ImportsByProduct extends Section {
                 height: 25,
                 fill: d => productsColorScale("hs" + d["ID HS0"]),
                 backgroundImage: d =>
-                  "/images/legend/hs/hs_" + d["ID HS0"] + ".png"
+                  asset_url("/images/legend/hs/hs_" + d["ID HS0"] + ".png")
               }
             },
             shapeConfig: {

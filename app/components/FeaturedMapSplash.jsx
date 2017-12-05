@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router";
 import { translate } from "react-i18next";
 import { text as loadSvgAsString } from "d3-request";
 import { Geomap } from "d3plus-react";
 
 import SVGCache from "helpers/svg";
-import { FORMATTERS } from "helpers/formatters";
-
-import SvgImage from "components/SvgImage";
+import { asset_url } from "helpers/url";
 
 import "./FeaturedDatumSplash.css";
 import "./FeaturedMapSplash.css";
@@ -29,7 +25,7 @@ class FeaturedMapSplash extends Component {
 
     if (this.props.type == "region") {
       this.cache.setSvg(
-        "/images/maps/zoom/comunas-" + this.props.code + ".svg",
+        asset_url("/images/maps/zoom/comunas-" + this.props.code + ".svg"),
         xml
       );
       this.setState({
@@ -40,7 +36,9 @@ class FeaturedMapSplash extends Component {
 
   componentDidMount() {
     if (this.props.type == "region") {
-      var src = "/images/maps/zoom/comunas-" + this.props.code + ".svg";
+      var src = asset_url(
+        "/images/maps/zoom/comunas-" + this.props.code + ".svg"
+      );
       var cached = this.cache.getSvg(src);
       if (cached) {
         this.callbackSvg(false, cached);
@@ -122,4 +120,4 @@ class FeaturedMapSplash extends Component {
   }
 }
 
-export default translate()(connect(state => ({}), {})(FeaturedMapSplash));
+export default translate()(FeaturedMapSplash);

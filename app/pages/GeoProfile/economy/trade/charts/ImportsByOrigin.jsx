@@ -7,7 +7,7 @@ import { browserHistory } from "react-router";
 import { numeral, slugifyItem } from "helpers/formatters";
 import { continentColorScale } from "helpers/colors";
 import { simpleGeoChartNeed } from "helpers/MondrianClient";
-import { getGeoObject } from "helpers/dataUtils";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -46,7 +46,8 @@ class ImportsByOrigin extends Section {
             total: d => d["CIF US"],
             totalConfig: {
               text: d =>
-                "Total: " + numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
+                "Total: " +
+                numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
             },
             on: {
               click: d => {
@@ -81,7 +82,9 @@ class ImportsByOrigin extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  asset_url(
+                    "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  )
               }
             }
           }}

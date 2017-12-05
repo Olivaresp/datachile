@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PersonItem from "components/PersonItem";
 import { translate } from "react-i18next";
-import mondrianClient, { geoCut } from "helpers/MondrianClient";
+import mondrianClient from "helpers/MondrianClient";
 import { getGeoObject } from "helpers/dataUtils";
+import { asset_url } from "helpers/url";
 import "./AuthoritiesBlock.css";
 
 class AuthoritiesBlock extends Component {
@@ -59,9 +60,9 @@ class AuthoritiesBlock extends Component {
               .cut("[Elected].[Elected].&[1]")
               .cut("[Election Type].[Election Type].&[3]")
               .cut(
-                `{[Date].[Date].[Year].&[${store
-                  .senators_election_year[0]}],[Date].[Date].[Year].&[${store
-                  .senators_election_year[1]}]}`
+                `{[Date].[Date].[Year].&[${
+                  store.senators_election_year[0]
+                }],[Date].[Date].[Year].&[${store.senators_election_year[1]}]}`
               );
 
             var id = 99999;
@@ -172,7 +173,7 @@ class AuthoritiesBlock extends Component {
       <div className="splash-authorities">
         <div className="splash-authorities-president">
           <PersonItem
-            imgpath={"/images/authorities/" + president.id + ".png"}
+            imgpath={asset_url("/images/authorities/" + president.id + ".png")}
             name={president.name}
             subtitle={t("President")}
             className="president lost-1-3"
@@ -182,7 +183,7 @@ class AuthoritiesBlock extends Component {
           {senators &&
             senators.map((s, ix) => (
               <PersonItem
-                imgpath={"/images/authorities/" + s.id + ".png"}
+                imgpath={asset_url("/images/authorities/" + s.id + ".png")}
                 name={s.name}
                 subtitle={t("Senator") + " " + s.party + ""}
                 className="senator lost-1-4"
@@ -192,7 +193,7 @@ class AuthoritiesBlock extends Component {
         {mayor && (
           <div className="splash-authorities-mayor">
             <PersonItem
-              imgpath={"/images/authorities/" + mayor.id + ".png"}
+              imgpath={asset_url("/images/authorities/" + mayor.id + ".png")}
               name={mayor.name}
               subtitle={t("Mayor")}
               className="mayor lost-1-4"

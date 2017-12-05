@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { translate } from "react-i18next";
-import { connect } from "react-redux";
-
 import SvgImage from "components/SvgImage";
+import { asset_url } from "helpers/url";
 
 import "./NavFixed.css";
 
@@ -58,7 +57,7 @@ class NavFixed extends Component {
             <div className="nav-titles-action">
               <div className="menu-button">
                 <a onClick={toggleSubNav}>
-                  <img src="/images/icons/icon-menu.svg" />
+                  <img src={asset_url("/images/icons/icon-menu.svg")} />
                 </a>
               </div>
               <span className="datachile">DataChile:</span>
@@ -72,13 +71,15 @@ class NavFixed extends Component {
                   {topics.map(topic => (
                     <a
                       key={topic.slug}
-                      className={`topic-link ${active == topic.slug
-                        ? " active"
-                        : ""}`}
+                      className={`topic-link ${
+                        active == topic.slug ? " active" : ""
+                      }`}
                       href={`#${topic.slug}`}
                     >
                       <SvgImage
-                        src={`/images/profile-icon/icon-${topic.slug}.svg`}
+                        src={asset_url(
+                          `/images/profile-icon/icon-${topic.slug}.svg`
+                        )}
                       />
                       {topic.title}
                     </a>
@@ -92,11 +93,4 @@ class NavFixed extends Component {
   }
 }
 
-export default translate()(
-  connect(
-    state => ({
-      focus: state.focus
-    }),
-    {}
-  )(NavFixed)
-);
+export default translate()(NavFixed);

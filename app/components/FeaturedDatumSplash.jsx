@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router";
 import { translate } from "react-i18next";
-import { FORMATTERS } from "helpers/formatters";
 import SvgImage from "components/SvgImage";
+
+import { asset_url } from "helpers/url";
 
 import "./FeaturedDatumSplash.css";
 
@@ -28,8 +27,6 @@ class FeaturedDatumSplash extends Component {
       none = 5 - half - full;
     }
 
-    const iconUrl = `/images/splash-icon/icon-${icon}.svg`;
-
     return (
       <div className={"featured-datum-splash " + className}>
         <h4 className="featured-datum-splash-title">
@@ -41,19 +38,19 @@ class FeaturedDatumSplash extends Component {
               {[...Array(full)].map((x, i) => (
                 <SvgImage
                   extraClass="full"
-                  src={`/images/splash-icon/icon-${icon}-full.svg`}
+                  src={asset_url(`/images/splash-icon/icon-${icon}-full.svg`)}
                 />
               ))}
               {half == 1 && (
                 <SvgImage
                   extraClass="half"
-                  src={`/images/splash-icon/icon-${icon}-half.svg`}
+                  src={asset_url(`/images/splash-icon/icon-${icon}-half.svg`)}
                 />
               )}
               {[...Array(none)].map((x, i) => (
                 <SvgImage
                   extraClass="none"
-                  src={`/images/splash-icon/icon-${icon}-none.svg`}
+                  src={asset_url(`/images/splash-icon/icon-${icon}-none.svg`)}
                 />
               ))}
             </div>
@@ -67,4 +64,4 @@ class FeaturedDatumSplash extends Component {
   }
 }
 
-export default translate()(connect(state => ({}), {})(FeaturedDatumSplash));
+export default translate()(FeaturedDatumSplash);

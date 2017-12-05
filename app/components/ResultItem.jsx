@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router";
 import { translate } from "react-i18next";
-import { FORMATTERS } from "helpers/formatters";
+
+import { asset_url } from "helpers/url";
 
 import "./ResultItem.css";
 
@@ -26,7 +26,10 @@ class ResultItem extends Component {
       >
         <span className="col-l">
           <span className="icon-container">
-            <img className="icon" src={`/images/icons/icon-${icon}.svg`} />
+            <img
+              className="icon"
+              src={asset_url(`/images/icons/icon-${icon}.svg`)}
+            />
           </span>
         </span>
         <span className="col-r">
@@ -37,4 +40,4 @@ class ResultItem extends Component {
   }
 }
 
-export default translate()(connect(state => ({}), {})(ResultItem));
+export default translate()(ResultItem);

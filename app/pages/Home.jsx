@@ -7,6 +7,7 @@ import FeaturedBox from "components/FeaturedBox";
 import Nav from "components/Nav";
 import Search from "components/Search";
 import DynamicHomeHeader from "components/DynamicHomeHeader";
+import { asset_url } from "helpers/url";
 
 import "./Home.css";
 import "../../node_modules/slick-carousel/slick/slick.css";
@@ -151,7 +152,9 @@ class Home extends Component {
                       onClick={() => changeProfileHeader(p)}
                     >
                       <h3>
-                        <img src={`/images/icons/icon-${p.slug}.svg`} />
+                        <img
+                          src={asset_url(`/images/icons/icon-${p.slug}.svg`)}
+                        />
                         <span>{p.name}</span>
                       </h3>
                     </div>

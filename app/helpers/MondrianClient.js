@@ -1,8 +1,9 @@
 import { Client as MondrianClient } from "mondrian-rest-client";
 import { getGeoObject } from "helpers/dataUtils";
 
-const client = new MondrianClient("https://chilecube.datawheel.us/");
+//const client = new MondrianClient("https://chilecube.datawheel.us/");
 //const client = new MondrianClient("http://localhost:9292/");
+const client = new MondrianClient("http://chilecube.nerdpower.org/");
 
 /**
  * Returns the provided query with the appropiate cut
