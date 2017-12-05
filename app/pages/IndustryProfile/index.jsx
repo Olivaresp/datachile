@@ -6,6 +6,7 @@ import { browserHistory } from "react-router";
 import { translate } from "react-i18next";
 
 import d3plus from "helpers/d3plus";
+import { asset_url } from "helpers/url";
 import { numeral, slugifyItem } from "helpers/formatters";
 import mondrianClient, {
   getMembersQuery,
@@ -271,7 +272,9 @@ class IndustryProfile extends Component {
               <div
                 className="image"
                 style={{
-                  backgroundImage: `url('/images/profile-bg/geo/chile.jpg')`
+                  backgroundImage: `url(${asset_url(
+                    "/images/profile-bg/geo/chile.jpg"
+                  )})`
                 }}
               />
               <div className="gradient" />

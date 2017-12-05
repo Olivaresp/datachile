@@ -556,7 +556,9 @@ class GeoProfile extends Component {
 
             <div className="arrow-container">
               <a href="#economy">
-                <SvgImage src="/images/profile-icon/icon-arrow.svg" />
+                <SvgImage
+                  src={asset_url("/images/profile-icon/icon-arrow.svg")}
+                />
               </a>
             </div>
           </div>

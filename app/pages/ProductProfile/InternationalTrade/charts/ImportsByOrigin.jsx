@@ -8,6 +8,7 @@ import { continentColorScale } from "helpers/colors";
 import { numeral, slugifyItem } from "helpers/formatters";
 import mondrianClient, { levelCut } from "helpers/MondrianClient";
 import { getLevelObject } from "helpers/dataUtils";
+import { asset_url } from "helpers/url";
 
 import ExportLink from "components/ExportLink";
 
@@ -100,7 +101,9 @@ class ImportsByDestination extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  asset_url(
+                    "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  )
               }
             }
           }}

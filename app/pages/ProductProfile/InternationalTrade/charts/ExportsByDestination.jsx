@@ -4,6 +4,7 @@ import { Treemap } from "d3plus-react";
 import { translate } from "react-i18next";
 import { browserHistory } from "react-router";
 
+import { asset_url } from "helpers/url";
 import { continentColorScale } from "helpers/colors";
 import { numeral, slugifyItem } from "helpers/formatters";
 import mondrianClient, { levelCut } from "helpers/MondrianClient";
@@ -100,7 +101,9 @@ class ExportsByDestination extends Section {
                 width: 40,
                 height: 40,
                 backgroundImage: d =>
-                  "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  asset_url(
+                    "/images/legend/continent/" + d["ID Continent"] + ".png"
+                  )
               }
             }
           }}

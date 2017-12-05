@@ -4,6 +4,7 @@ import { SectionColumns, CanonComponent } from "datawheel-canon";
 import { translate } from "react-i18next";
 import _ from "lodash";
 
+import { asset_url } from "helpers/url";
 import d3plus from "helpers/d3plus";
 import { numeral, slugifyItem } from "helpers/formatters";
 import mondrianClient, {
@@ -341,7 +342,9 @@ class ProductProfile extends Component {
               <div
                 className="image"
                 style={{
-                  backgroundImage: `url('/images/profile-bg/geo/chile.jpg')`
+                  backgroundImage: `url(${asset_url(
+                    "/images/profile-bg/geo/chile.jpg"
+                  )})`
                 }}
               />
               <div className="gradient" />
@@ -413,7 +416,9 @@ class ProductProfile extends Component {
 
             <div className="arrow-container">
               <a href="#about">
-                <SvgImage src="/images/profile-icon/icon-arrow.svg" />
+                <SvgImage
+                  src={asset_url("/images/profile-icon/icon-arrow.svg")}
+                />
               </a>
             </div>
           </div>
