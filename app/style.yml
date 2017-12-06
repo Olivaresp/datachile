@@ -51,6 +51,3 @@ break-md: "992px"
 break-sm: "768px"
 break-xs: "480px"
 break-xxs: "320px"
-
-asset_host: "https://s.datachile.io"
-
