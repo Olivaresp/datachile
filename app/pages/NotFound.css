@@ -27,7 +27,7 @@
       z-index: var(--background);
 
       & .image {
-        background-image: url("/images/geo/040AF00133.jpg");
+        background-image: url(/images/geo/040AF00133.jpg);
         background-position: 50%;
         background-size: cover;
         filter: saturate(150%) contrast(130%);
