@@ -74,39 +74,23 @@ class MigrationByOrigin extends Section {
                 return d["Country"] instanceof Array
                   ? d["Continent"]
                   : d["Country"];
-              },
-              sum: d => d["Number of visas"],
-              time: "ID Year",
-              total: d => d["Number of visas"],
-              totalConfig: {
-                text: d =>
-                  "Total: " +
-                  numeral(d.text.split(": ")[1], locale).format("0,0") +
-                  t(" immigrants")
-              },
+              }
+            },
+            total: d => d["Number of visas"],
+            totalConfig: {
+              text: d =>
+                "Total: " +
+                numeral(d.text.split(": ")[1], locale).format("0,0") +
+                t(" immigrants")
+            },
+            legendConfig: {
+              label: d => d["Continent"],
               shapeConfig: {
-                fill: d => continentColorScale(d["ID Continent"])
-              },
-              tooltipConfig: {
-                title: d => {
-                  d["Country"] =
-                    d["Country"] == "Chile" ? ["Chile"] : d["Country"];
-                  return d["Country"] instanceof Array
-                    ? d["Continent"]
-                    : d["Country"];
-                },
-                body: d =>
-                  numeral(d["Number of visas"], locale).format("(0 a)") +
-                  " " +
-                  t("people")
-              },
-              legendConfig: {
-                label: d => d["Continent"],
-                shapeConfig: {
-                  width: 40,
-                  height: 40,
-                  backgroundImage: d =>
-                    asset_url("/images/legend/continent/" + d["ID Continent"] + ".png")
+                width: 40,
+                height: 40,
+                backgroundImage: d =>
+                  asset_url(
+                    "/images/legend/continent/" + d["ID Continent"] + ".png"
                   )
               }
             }
