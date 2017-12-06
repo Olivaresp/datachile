@@ -39,14 +39,14 @@ class ExportsByDestination extends Section {
             height: 500,
             data: path,
             groupBy: ["ID Continent", "ID Country"],
-            label: d =>
-              d["Country"] instanceof Array ? d["Continent"] : d["Country"],
+            label: d => d["Country"],
             sum: d => d["FOB US"],
             time: "ID Year",
             total: d => d["FOB US"],
             totalConfig: {
               text: d =>
-                "Total: " + numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
+                "Total: US" +
+                numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
             },
             shapeConfig: {
               fill: d => continentColorScale("c" + d["ID Continent"])
@@ -80,6 +80,7 @@ class ExportsByDestination extends Section {
               }
             },
             legendConfig: {
+              label: d => d["Continent"],
               shapeConfig: {
                 width: 40,
                 height: 40,
