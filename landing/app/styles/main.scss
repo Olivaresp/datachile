@@ -255,3 +255,63 @@ p.topic {
     margin: 25px auto 74px auto;
   }
 }
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (max-width: 1024px) {
+  .blue-left {
+    background-position: left center;
+  }
+  .blue-right {
+    background-position: right center;
+  }
+  p.topic {
+    margin-bottom: 50px;
+  }
+  p.source {
+    color: $snow;
+  }
+  h2 {
+    font-size: 30px;
+  }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (max-width: 767px) {
+  section#countdown {
+    & #counter {
+      margin-bottom: 40px;
+      & div {
+        & span.value {
+          font-size: 40px;
+        }
+        & span.unit {
+          text-align: right;
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+          position: relative;
+          top: 40px;
+        }
+      }
+    }
+  }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  //CSS
+}
