@@ -16,6 +16,7 @@
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     
@@ -29,39 +30,41 @@
     <![endif]-->
     
     <section id="splash">
-      <div  class="row center-xs center-md">
-        <div class="col-md-6">
+      <div  class="row center-xs center-md center-xs">
+        <div class="col-md-4 col-sm-6 col-xs-10">
               <div class="box">
-                <img src="images/logo-dc.svg" />
+                <h1>
+                  <a href="http://datachile.io">
+                    <img src="images/logo-dc.svg" alt="DataChile" />
+                  </a>
+                </h1>
               </div>
         </div>
       </div>
       <div  class="row center-xs center-md">
-        <div class="col-md-6">
+        <div class="col-md-8">
               <div class="box">
-                <p class="normal">Un proyecto que</p>
-                <p class="accent">procesa</p>
-                <p class="accent">integra</p>
-                <p class="accent">distribuye</p>
-                <p class="accent">visualiza</p>
+                <p class="normal">Es un proyecto que</p>
+                <div class="keywords">
+                  <p class="accent">procesa</p>
+                  <p class="accent">integra</p>
+                  <p class="accent">distribuye</p>
+                  <p class="accent">visualiza</p>
+                </div>
                 <p class="normal">millones de datos públicos de más de 20 fuentes de datos oficiales*,
 de manera accesible y comprensible para cualquier usuario.</p>
               </div>
         </div>
       </div>
-      <div  class="row center-xs">
-        <div class="col-md-12">
-          <img src="images/landscape-chile.svg" />
-        </div>
-      </div>
+      <img id="landscape" src="images/landscape-chile-complete.svg"></img>
     </section>
 
     <section id="countdown">
-      
+
       <div class="row center-xs">
         <div class="col-xs-12">
               <div class="box">
-                <h2>Lanzamiento en:</h2>
+                <h2 class="text-up">Lanzamiento en:</h2>
               </div>
         </div>
       </div>
@@ -79,7 +82,15 @@ de manera accesible y comprensible para cualquier usuario.</p>
       <div class="row center-xs">
         <div class="col-xs-12">
           <div class="box">
-              <p class="normal">Síguenos y comparte</p>
+              <p class="normal text-up">Síguenos y comparte</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row center-xs">
+        <div class="col-xs-12">
+          <div class="box">
+              <span class="white-line"></span>
           </div>
         </div>
       </div>
@@ -107,9 +118,10 @@ de manera accesible y comprensible para cualquier usuario.</p>
         <div class="col-xs-6">
               <div class="box">
                 <h2>¿Para qué?</h2>
+                <span class="blue-line space"></span>
                 <p class="normal">Facilitar el <span>acceso a la información pública</span>, integrada en un solo lugar y de fácil lectura.</p>
                 <p class="normal">Ofrecer una radiografía de las <span>temáticas más importantes</span> para el desarrollo del país.</p>
-                <p>Conocer las <span>tendencias, necesidades y oportunidades</span> que permitan el diseño,, mejoramiento y seguimiento de <span>políticas públicas</span> y <span>programas</span> de la sociedad civil, la búsqueda de nuevos <span>negocios</span> y la focalización de <span>estrategias</span> de marketing del sector privado.</p>
+                <p class="normal">Conocer las <span>tendencias, necesidades y oportunidades</span> que permitan el diseño, mejoramiento y seguimiento de <span>políticas públicas</span> y <span>programas</span> de la sociedad civil, la búsqueda de nuevos <span>negocios</span> y la focalización de <span>estrategias</span> de marketing del sector privado.</p>
                 <p class="normal">Colaborar en la <span>toma de decisiones</span> tanto del sector público como privado.</p>
               </div>
         </div>
@@ -120,8 +132,9 @@ de manera accesible y comprensible para cualquier usuario.</p>
       <div class="row middle-xs between-xs">
         <div class="col-xs-5">
           <div class="box">
-            <h2>Entorno y calidad de vida</h2>
-            <p>¿Sabes cuál es el porcentaje de <strong>hogares conectados a internet</strong> en el país?</p>
+            <h2 class="text-up text-center">Entorno y calidad de vida</h2>
+            <span class="blue-line space"></span>
+            <p class="topic">¿Sabes cuál es el porcentaje de <strong>hogares conectados a internet</strong> en el país?</p>
           </div>
         </div>
         <div class="col-xs-5">
@@ -143,8 +156,9 @@ de manera accesible y comprensible para cualquier usuario.</p>
         </div>
         <div class="col-xs-5">
           <div class="box">
-            <h2>Educación</h2>
-            <p>¿Cuáles son los <strong>colegios</strong> con mayor cantidad de <strong>inscritos</strong> en tu comuna?</p>
+            <h2 class="text-up text-center">Educación</h2>
+            <span class="blue-line space"></span>
+            <p class="topic">¿Cuáles son los <strong>colegios</strong> con mayor cantidad de <strong>inscritos</strong> en tu comuna?</p>
           </div>
         </div>
       </div>
@@ -154,8 +168,9 @@ de manera accesible y comprensible para cualquier usuario.</p>
       <div class="row middle-xs between-xs">
         <div class="col-xs-5">
           <div class="box">
-            <h2>Economía</h2>
-            <p>¿Cuál es la <strong>ocupación</strong> con <strong>mayores ingresos</strong> en Tarapacá?</p>
+            <h2 class="text-up text-center">Economía</h2>
+            <span class="blue-line space"></span>
+            <p class="topic">¿Cuál es la <strong>ocupación</strong> con <strong>mayores ingresos</strong> en Tarapacá?</p>
           </div>
         </div>
         <div class="col-xs-5">
@@ -177,8 +192,9 @@ de manera accesible y comprensible para cualquier usuario.</p>
         </div>
         <div class="col-xs-5">
           <div class="box">
-            <h2>Demografía</h2>
-            <p>¿Cuál es la <strong>comuna</strong> con <strong>mayor</strong> concentración de <strong>inmigrantes</strong> con <strong>residencia definitiva</strong>?</p>
+            <h2 class="text-up text-center">Demografía</h2>
+            <span class="blue-line space"></span>
+            <p class="topic">¿Cuál es la <strong>comuna</strong> con <strong>mayor</strong> concentración de <strong>inmigrantes</strong> con <strong>residencia definitiva</strong>?</p>
           </div>
         </div>
       </div>
@@ -188,8 +204,9 @@ de manera accesible y comprensible para cualquier usuario.</p>
       <div class="row middle-xs between-xs">
         <div class="col-xs-5">
           <div class="box">
-            <h2>Salud</h2>
-            <p>¿Pricipal causa de <strong>muerte</strong> en el año <strong>2014</strong>?</p>
+            <h2 class="text-up text-center">Salud</h2>
+            <span class="blue-line space"></span>
+            <p class="topic">¿Pricipal causa de <strong>muerte</strong> en el año <strong>2014</strong>?</p>
           </div>
         </div>
         <div class="col-xs-5">
@@ -211,8 +228,9 @@ de manera accesible y comprensible para cualquier usuario.</p>
         </div>
         <div class="col-xs-5">
           <div class="box">
-            <h2>Política</h2>
-            <p>¿Qué <strong>senadores</strong> fueron electos en la región de <strong>Aysén</strong> en 2010?</p>
+            <h2 class="text-up text-center">Política</h2>
+            <span class="blue-line space"></span>
+            <p class="topic">¿Qué <strong>senadores</strong> fueron electos en la región de <strong>Aysén</strong> en 2010?</p>
           </div>
         </div>
       </div>
@@ -225,13 +243,13 @@ de manera accesible y comprensible para cualquier usuario.</p>
         </div>
       </div>
       <div class="row middle-xs center-xs">
-        <div class="col-md-10 col-xs-12">
-          <img src="images/logos/logo-dw.svg" width="200" />
-          <img src="images/logos/logo-amsa.svg" width="100" />
-          <img src="images/logos/logo-asech.svg" width="100" />
-          <img src="images/logos/logo-corfo-beneficiarios.svg" width="100" />
-          <img src="images/logos/logo-minecon.svg" width="50" />
-          <img src="images/logos/logo-direcon.svg" width="50" />
+        <div class="col-md-10 col-xs-12 middle-xs">
+          <img src="images/logos/logo-dw.svg" height="60"/>
+          <img src="images/logos/logo-am-small.svg" height="80"/>
+          <img src="images/logos/logo-asech.svg" height="60"/>
+          <img src="images/logos/logo-corfo-beneficiarios.svg" height="80"/>
+          <img src="images/logos/logo-minecon.svg" height="60"/>
+          <img src="images/logos/logo-direcon.svg" height="60"/>
         </div>
       </div>
     </footer>
