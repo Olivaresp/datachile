@@ -73,6 +73,7 @@ body {
   margin: 0;
   padding: 0;
   color: $snow;
+  overflow-x: hidden;
 }
 
 section {
@@ -171,7 +172,7 @@ section#politics {
 
 footer {
   background-color: $night;
-  padding: 50px 25px 25px 25px;
+  padding: 50px 25px 50px 25px;
 }
 
 h1 {
