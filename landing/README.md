@@ -1,4 +1,4 @@
-## Datachile Landing page
+# Datachile Landing page
 
 Based on [Yeoman webapp generator](https://github.com/yeoman/generator-webapp)
 
