@@ -220,7 +220,6 @@ class DynamicHomeHeader extends Component {
   }
 
   callbackSvg = (error, response, src) => {
-    const { header, data } = this.props;
     var xml = response.responseText ? response.responseText : response;
     var that = this;
 

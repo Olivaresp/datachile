@@ -24,7 +24,7 @@
       color: var(--snow);
       padding: 15px 10px 15px 60px;
       width: 100%;
-      background-image: url("/images/icons/icon-search.svg");
+      background-image: url(/images/icons/icon-search.svg);
       background-repeat: no-repeat;
       background-position: 20px center;
       background-color: transparent;
@@ -47,7 +47,7 @@
         color: var(--dark);
       }
       &.loading {
-        background-image: url("/images/icons/icon-mini-loader.svg");
+        background-image: url(/images/icons/icon-mini-loader.svg);
       }
     }
   }
