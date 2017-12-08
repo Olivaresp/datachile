@@ -52,11 +52,8 @@ class ExportsByProduct extends Section {
             total: d => d["FOB US"],
             totalConfig: {
               text: d =>
-                "Total: " +
+                "Total: US" +
                 numeral(d.text.split(": ")[1], locale).format("($ 0.00 a)")
-            },
-            shapeConfig: {
-              fill: d => productsColorScale("hs" + d["ID HS0"])
             },
             on: {
               click: d => {

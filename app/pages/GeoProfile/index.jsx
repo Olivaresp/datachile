@@ -87,6 +87,7 @@ import CollegeByEnrollment from "./education/enrollment/charts/CollegeByEnrollme
 
 import PerformanceSlide from "./education/performance/PerformanceSlide";
 import PerformanceByType from "./education/performance/charts/PerformanceByType";
+import PerformanceBySchool from "./education/performance/charts/PerformanceBySchool";
 
 import HigherEducationSlide from "./education/higher/HigherEducationSlide";
 import PSUResultsBySex from "./education/higher/charts/PSUResultsBySex";
@@ -140,6 +141,13 @@ import DeathCausesSlide from "./health/death/DeathCausesSlide";
 import DeathCauses from "./health/death/charts/DeathCauses";
 
 /* end Health */
+
+/** Politics */
+
+//import ElectionSlide from "./politics/election/ElectionSlide";
+//import MayorResults from "./politics/election/charts/MayorResults";
+
+/** end Politics */
 
 import "../intro.css";
 import "../topics.css";
@@ -225,6 +233,7 @@ class GeoProfile extends Component {
 
     PerformanceSlide,
     PerformanceByType,
+    PerformanceBySchool,
 
     EnrollmentSlide,
     CollegeByEnrollment,
@@ -255,6 +264,9 @@ class GeoProfile extends Component {
 
     DeathCausesSlide,
     DeathCauses
+
+    //ElectionSlide,
+    //MayorResults
   ];
 
   render() {
@@ -379,9 +391,15 @@ class GeoProfile extends Component {
               <div
                 className="image"
                 style={{
+<<<<<<< HEAD
                   backgroundImage: `url(${asset_url(
                     "/images/profile-bg/geo/" + geoObj.images
                   )})`
+=======
+                  backgroundImage: `url('/images/profile-bg/geo/${
+                    geoObj.image
+                  }')`
+>>>>>>> master
                 }}
               />
               <div className="gradient" />
@@ -670,18 +688,8 @@ class GeoProfile extends Component {
               <div>
                 <IDSpendingCategorySlide>
                   <SectionColumns>
-                    {/*
-                                        <SpendingByFundingSource className="lost-1-2" />
-                                        <SpendingByArea className="lost-1-2" />
-                                      */}
-                    <Placeholder
-                      className="lost-1-2"
-                      text="RD - By Funding Source"
-                    />
-                    <Placeholder
-                      className="lost-1-2"
-                      text="RD - By Knowledge Area"
-                    />
+                    <SpendingByFundingSource className="lost-1-2" />
+                    <SpendingByArea className="lost-1-2" />
                   </SectionColumns>
                 </IDSpendingCategorySlide>
               </div>
@@ -763,8 +771,7 @@ class GeoProfile extends Component {
               <div>
                 <PerformanceSlide>
                   <SectionColumns>
-                    {/* <PerformanceByType className="lost-1" /> */}
-                    <Placeholder className="lost-1" text="Performance" />
+                    <PerformanceBySchool className="lost-1-2" />
                   </SectionColumns>
                 </PerformanceSlide>
               </div>
@@ -782,6 +789,10 @@ class GeoProfile extends Component {
               id="environment"
               sections={[
                 {
+                  name: t("Amenities"),
+                  slides: [t("Access to services")]
+                },
+                {
                   name: t("Quality"),
                   slides: [t("Housing Conditions")]
                 },
@@ -792,13 +803,16 @@ class GeoProfile extends Component {
                     t("Devices"),
                     t("Internet use")
                   ]
-                },
-                {
-                  name: t("Amenities"),
-                  slides: [t("Access to services")]
                 }
               ]}
             >
+              <div>
+                <ServicesAccessSlide>
+                  <SectionColumns>
+                    <Services className="lost-1" />
+                  </SectionColumns>
+                </ServicesAccessSlide>
+              </div>
               <div>
                 <QualitySlide>
                   <SectionColumns>
@@ -835,13 +849,6 @@ class GeoProfile extends Component {
                     <Placeholder className="lost-1-2" text="Internet uses" />
                   </SectionColumns>
                 </InternetUseSlide>
-              </div>
-              <div>
-                <ServicesAccessSlide>
-                  <SectionColumns>
-                    <Services className="lost-1" />
-                  </SectionColumns>
-                </ServicesAccessSlide>
               </div>
             </Topic>
 
@@ -951,6 +958,26 @@ class GeoProfile extends Component {
                 </DeathCausesSlide>
               </div>
             </Topic>
+            {/*
+            <Topic
+              name={t("Politics")}
+              id="politics"
+              sections={[
+                {
+                  name: t("Mayor Election"),
+                  slides: [t("Results")]
+                }
+              ]}
+            >
+              <div>
+                <ElectionSlide>
+                  <SectionColumns>
+                    <MayorResults className="lost-1" />
+                  </SectionColumns>
+                </ElectionSlide>
+              </div>
+            </Topic>
+            */}
           </div>
         </div>
       </CanonComponent>

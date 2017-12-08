@@ -291,6 +291,10 @@ class CountryProfile extends Component {
 
     const list = this.props.data.country_list_detail;
 
+    const bgImage = obj.key
+      ? `url(${asset_url("/images/profile-bg/country/" + obj.key + ".jpg")}`
+      : "";
+
     obj && ids && list
       ? list.map(c => {
           c.label = ids.level2 ? c["caption"] : c["Country"];
@@ -368,9 +372,7 @@ class CountryProfile extends Component {
               <div
                 className="image"
                 style={{
-                  backgroundImage: `url(${asset_url(
-                    "/images/profile-bg/geo/chile.jpg"
-                  )})`
+                  backgroundImage: bgImage
                 }}
               />
               <div className="gradient" />

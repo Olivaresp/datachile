@@ -20,12 +20,9 @@ class Search extends Component {
       loading: false,
       results: []
     };
-    this.handleChange = debounce(this.handleChange, 500);
   }
 
   handleChange(userQuery) {
-    const { limit } = this.props;
-
     if (userQuery.length <= 3) {
       // bail out early on empty query
       this.setState({ active: true, results: [] });
@@ -34,14 +31,18 @@ class Search extends Component {
 
     this.setState({ loading: true });
 
+    // XXX TODO don't hardcode this once we're finally able to configure canon
+    // via env vars
     request(
       `https://chilecube.datawheel.us/search?q=${encodeURIComponent(
         userQuery
-      )}&limit=10`,
-      (error, data) => {
-        const r = JSON.parse(data.responseText);
-        this.setState({ active: true, results: r, loading: false });
-      }
+      )}&limit=10&lang=${encodeURIComponent(this.props.i18n.language)}`,
+      (error, data) =>
+        this.setState({
+          active: true,
+          results: JSON.parse(data.responseText),
+          loading: false
+        })
     );
   }
 
@@ -51,6 +52,8 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    this.handleChange = debounce(this.handleChange, 300).bind(this);
+
     document.addEventListener(
       "keydown",
       () => {
@@ -76,14 +79,14 @@ class Search extends Component {
         ) {
           event.preventDefault();
           toggle();
-        } else if (enabled && key === ESC && event.target === this.refs.input) {
+        } else if (enabled && key === ESC && event.target === this.ref_input) {
           event.preventDefault();
           toggle();
-        } else if (enabled && event.target === this.refs.input) {
+        } else if (enabled && event.target === this.ref_input) {
           const highlighted = document.querySelector(".highlighted");
 
           if (key === ENTER && highlighted) {
-            //this.refs.input.value = highlighted.querySelector("a").innerHTML;
+            //this.ref_input.value = highlighted.querySelector("a").innerHTML;
             toggle();
             setTimeout(() => {
               browserHistory.push(highlighted.querySelector("a").href);
@@ -162,9 +165,9 @@ class Search extends Component {
     const availableClass =
       results && results.length > 0 ? "available" : "not-available";
 
-    if (this.refs.input) {
-      if (enabled) this.refs.input.focus();
-      else this.refs.input.blur();
+    if (this.ref_input) {
+      if (enabled) this.ref_input.focus();
+      else this.ref_input.blur();
     }
 
     return (
@@ -175,35 +178,46 @@ class Search extends Component {
           <input
             className={loading ? "loading" : ""}
             type="text"
-            ref="input"
+            ref={input => (this.ref_input = input)}
             onChange={this.onChange.bind(this)}
             placeholder={t("Search a location, industry, product, career, etc")}
           />
         </div>
         <ul className={`results ${availableClass}`}>
-          {results.map(result => (
-            <li key={`${result.index_as}-${result.key}`} className="result">
-              <Link
-                to={slugifyItem(
-                  result.index_as,
-                  result.ancestor_key ? result.ancestor_key : result.key,
-                  result.ancestor_name ? result.ancestor_name : result.content,
-                  result.ancestor_key ? result.key : result.ancestor_key,
-                  result.ancestor_name ? result.content : result.ancestor_name
-                )}
+          {results.map((result, i) => {
+            var url;
+            if (result.ancestor_key === 0) {
+              url = slugifyItem(result.index_as, result.key, result.content);
+            } else {
+              url = slugifyItem(
+                result.index_as,
+                result.ancestor_key,
+                result.ancestor_name,
+                result.key,
+                result.content
+              );
+            }
+            return (
+              <li
+                key={`${result.index_as}-${result.key}-${i}`}
+                className="result"
               >
-                <span className="icon-container">
-                  <img
-                    className="icon"
-                    src={asset_url(`/images/icons/icon-${result.index_as}.svg`)}
-                  />
-                </span>
-                <span className="content">{result.content}</span>
-                <span className="separator">|</span>
-                <span className="type">{this.getProfileType(result)}</span>
-              </Link>
-            </li>
-          ))}
+                <Link to={url}>
+                  <span className="icon-container">
+                    <img
+                      className="icon"
+                      src={asset_url(
+                        `/images/icons/icon-${result.index_as}.svg`
+                      )}
+                    />
+                  </span>
+                  <span className="content">{result.content}</span>
+                  <span className="separator">|</span>
+                  <span className="type">{this.getProfileType(result)}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     );

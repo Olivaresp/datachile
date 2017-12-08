@@ -56,14 +56,16 @@ class MigrationByOrigin extends Section {
             height: 500,
             data: path,
             groupBy: ["ID Continent", "ID Country"],
-            label: d => {
-              d["Country"] = d["Country"] == "Chile" ? ["Chile"] : d["Country"];
-              return d["Country"] instanceof Array
-                ? d["Continent"]
-                : d["Country"];
-            },
             sum: d => d["Number of visas"],
             time: "ID Year",
+            total: d => d["Number of visas"],
+            totalConfig: {
+              text: d =>
+                "Total: " +
+                numeral(d.text.split(": ")[1], locale).format("0,0") +
+                " " +
+                t("visas")
+            },
             shapeConfig: {
               fill: d => continentColorScale(d["ID Continent"])
             },
@@ -81,6 +83,7 @@ class MigrationByOrigin extends Section {
                 t("people")
             },
             legendConfig: {
+              label: d => d["Continent"],
               shapeConfig: {
                 width: 40,
                 height: 40,
