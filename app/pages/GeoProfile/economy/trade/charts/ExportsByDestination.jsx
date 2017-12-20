@@ -6,21 +6,33 @@ import { browserHistory } from "react-router";
 
 import { continentColorScale } from "helpers/colors";
 import { numeral, slugifyItem } from "helpers/formatters";
-import { simpleGeoChartNeed } from "helpers/MondrianClient";
+import { geoChartPath } from "helpers/MondrianClient";
 
 import ExportLink from "components/ExportLink";
 
 class ExportsByDestination extends Section {
-  static need = [
-    simpleGeoChartNeed("path_exports_by_destination", "exports", ["FOB US"], {
-      drillDowns: [["Destination Country", "Country"], ["Date", "Year"]],
-      options: { parents: true }
-    })
-  ];
+  state = { chartPath: null };
+
+  componentDidMount() {
+    geoChartPath(
+      this.props.i18n.locale,
+      this.context.data.geo,
+      "exports",
+      ["FOB US"],
+      {
+        drillDowns: [["Destination Country", "Country"], ["Date", "Year"]],
+        options: { parents: true }
+      }
+    ).then(path => {
+      this.setState({
+        chartPath: path
+      });
+    });
+  }
 
   render() {
     const { t, className, i18n } = this.props;
-    const path = this.context.data.path_exports_by_destination;
+    const path = this.state.chartPath;
     const geo = this.context.data.geo;
     const locale = i18n.locale;
 

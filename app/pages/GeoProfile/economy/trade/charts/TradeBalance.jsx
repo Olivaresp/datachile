@@ -4,10 +4,7 @@ import values from "lodash/values";
 import { LinePlot } from "d3plus-react";
 import { translate } from "react-i18next";
 
-import mondrianClient, {
-  geoChartPath,
-  simpleGeoChartNeed
-} from "helpers/MondrianClient";
+import { geoChartPath } from "helpers/MondrianClient";
 import { tradeBalanceColorScale } from "helpers/colors";
 import { melt, replaceKeyNames } from "helpers/dataUtils";
 import { numeral } from "helpers/formatters";
@@ -15,28 +12,25 @@ import { numeral } from "helpers/formatters";
 import ExportLink from "components/ExportLink";
 
 class TradeBalance extends Section {
-  static need = [
-    simpleGeoChartNeed(
-      "path_trade_balance",
-      "exports_and_imports",
-      ["FOB", "CIF", "Trade Balance"],
-      { drillDowns: [["Date", "Year"]] }
-    )
-  ];
+  state = { chartPath: null };
 
   componentDidMount() {
     geoChartPath(
       this.props.i18n.locale,
       this.context.data.geo,
       "exports_and_imports",
-      ["FOB", "CIF", "Trade Balance"]
-    );
+      ["FOB", "CIF", "Trade Balance"],
+      { drillDowns: [["Date", "Year"]] }
+    ).then(path => {
+      this.setState({
+        chartPath: path
+      });
+    });
   }
 
   render() {
     const { t, className, i18n } = this.props;
-    const path = this.context.data.path_trade_balance;
-    // const locale = i18n.locale;
+    const path = this.state.chartPath;
     const locale = i18n.locale;
 
     return (

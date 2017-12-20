@@ -179,10 +179,10 @@ class GeoProfile extends Component {
 
     TradeSlide,
     ExportsByProduct,
-    ExportsByDestination,
+    // ExportsByDestination,
     ImportsByOrigin,
     ImportsByProduct,
-    TradeBalance,
+    //TradeBalance,
 
     OpportunitySlide,
     ProductSpace,
