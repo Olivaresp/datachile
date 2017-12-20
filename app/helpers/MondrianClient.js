@@ -109,6 +109,32 @@ function getMemberQuery(cube, dimension, level, key, locale = "en") {
     });
 }
 
+function geoChartPath(
+  locale,
+  geoObj,
+  cube,
+  measures,
+  { drillDowns = [], options = {}, cuts = [] }
+) {
+  const prm = client.cube(cube).then(cube => {
+    const q = cube.query;
+    measures.forEach(m => {
+      q.measure(m);
+    });
+    drillDowns.forEach(([...dd]) => {
+      q.drilldown(...dd);
+    });
+    Object.entries(options).forEach(([k, v]) => q.option(k, v));
+    cuts.forEach(c => q.cut(c));
+
+    return `${__API__}${geoCut(geoObj, "Geography", q, locale).path(
+      "jsonrecords"
+    )}`;
+  });
+
+  return prm;
+}
+
 function simpleGeoChartNeed(
   key,
   cube,
@@ -475,6 +501,7 @@ export {
   setLangCaptions,
   getMeasureByGeo,
   getCountryCut,
+  geoChartPath,
   simpleGeoChartNeed,
   simpleIndustryChartNeed,
   simpleDatumNeed,

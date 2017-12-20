@@ -4,7 +4,10 @@ import values from "lodash/values";
 import { LinePlot } from "d3plus-react";
 import { translate } from "react-i18next";
 
-import { simpleGeoChartNeed } from "helpers/MondrianClient";
+import mondrianClient, {
+  geoChartPath,
+  simpleGeoChartNeed
+} from "helpers/MondrianClient";
 import { tradeBalanceColorScale } from "helpers/colors";
 import { melt, replaceKeyNames } from "helpers/dataUtils";
 import { numeral } from "helpers/formatters";
@@ -20,6 +23,15 @@ class TradeBalance extends Section {
       { drillDowns: [["Date", "Year"]] }
     )
   ];
+
+  componentDidMount() {
+    geoChartPath(
+      this.props.i18n.locale,
+      this.context.data.geo,
+      "exports_and_imports",
+      ["FOB", "CIF", "Trade Balance"]
+    );
+  }
 
   render() {
     const { t, className, i18n } = this.props;
