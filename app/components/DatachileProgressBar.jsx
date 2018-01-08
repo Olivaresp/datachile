@@ -6,7 +6,7 @@ import "./DatachileProgressBar.css";
 
 class DatachileProgressBar extends Component {
 	render() {
-		const { value } = this.props;
+		const { value, failed } = this.props;
 		return (
 			<div className="datachile-progress-bar">
 				<img
@@ -14,6 +14,7 @@ class DatachileProgressBar extends Component {
 					src="/images/logos/logo-dc-beta-small.svg"
 				/>
 				<ProgressBar value={value} />
+        <h1>{failed}</h1>
 			</div>
 		);
 	}

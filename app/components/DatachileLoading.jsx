@@ -9,13 +9,13 @@ import "./DatachileLoading.css";
 
 class DatachileLoading extends Component {
   render() {
-    const { progress, t, total } = this.props;
+    const { progress, t, total, failed } = this.props;
     return (
       <NonIdealState
         className="data-chile-loading"
         title={t("loading.description", { progress, total })}
         description={t("loading.developed")}
-        visual={<DatachileProgressBar value={progress / total} />}
+        visual={<DatachileProgressBar failed={failed} value={progress / total} />}
       />
     );
   }
@@ -24,7 +24,8 @@ class DatachileLoading extends Component {
 DatachileLoading = translate()(
   connect(state => ({
     total: state.loadingProgress.requests,
-    progress: state.loadingProgress.fulfilled
+    progress: state.loadingProgress.fulfilled,
+    failed: state.failureCatcher.failed
   }))(DatachileLoading)
 );
 

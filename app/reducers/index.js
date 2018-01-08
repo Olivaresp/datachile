@@ -11,6 +11,18 @@ const searchActive = (state = false, action) => {
 
 const id = (state = {}) => state;
 
+function failureCatcher(state = { failed: 0 }, action) {
+  switch (action.type) {
+    case "GET_DATA_FAILURE":
+      return {
+        ...state,
+        failed: state.failed + 1
+      };
+    default:
+      return state;
+  }
+}
+
 export default {
   focus: id,
   population_year: id,
@@ -25,5 +37,6 @@ export default {
   nene_year: id,
   nene_month: id,
   sources: id,
+  failureCatcher: failureCatcher,
   search: combineReducers({ searchActive })
 };
