@@ -663,6 +663,17 @@ function simpleDatumNeed(
               store.i18n.locale
             );
             break;
+          case "institution":
+            query = levelCut(
+              obj,
+              "Higher Institutions",
+              "Higher Institutions",
+              q,
+              "Higher Institutions Subgroup",
+              "Higher Institutions",
+              store.i18n.locale
+            );
+            break;
           case "no_cut":
             query = setLangCaptions(q, store.i18n.locale);
             break;
@@ -696,6 +707,112 @@ function simpleDatumNeed(
           };
         }
       });
+
+    return {
+      type: "GET_DATA",
+      promise: prm
+    };
+  };
+}
+
+function simpleChartNeed(
+  key,
+  cube,
+  measures,
+  { drillDowns = [], options = {}, cuts = [] },
+  profile
+) {
+  return (params, store) => {
+    let obj = getLevelObject(params);
+
+    const prm = client.cube(cube).then(cube => {
+      const q = cube.query;
+      measures.forEach(m => {
+        q.measure(m);
+      });
+      drillDowns.forEach(([...dd]) => {
+        q.drilldown(...dd);
+      });
+      Object.entries(options).forEach(([k, v]) => q.option(k, v));
+      cuts.forEach(c => q.cut(c));
+
+      var query = [];
+
+      switch (profile) {
+        case "geo":
+          query = geoCut(obj, "Geography", q, store.i18n.locale).path(
+            "jsonrecords"
+          );
+          break;
+        case "country":
+          query = levelCut(
+            obj,
+            "Origin Country",
+            "Country",
+            q,
+            "Continent",
+            "Country",
+            store.i18n.locale,
+            false
+          ).path("jsonrecords");
+          break;
+        case "industry":
+          query = levelCut(
+            obj,
+            "ISICrev4",
+            "ISICrev4",
+            q,
+            "Level 1",
+            "Level 2",
+            store.i18n.locale
+          ).path("jsonrecords");
+          break;
+        case "product.export":
+          query = levelCut(
+            obj,
+            "Export HS",
+            "HS",
+            q,
+            "HS0",
+            "HS2",
+            store.i18n.locale
+          ).path("jsonrecords");
+          break;
+        case "product.import":
+          query = levelCut(
+            obj,
+            "Import HS",
+            "HS",
+            q,
+            "HS0",
+            "HS2",
+            store.i18n.locale
+          ).path("jsonrecords");
+          break;
+        case "institution":
+          query = levelCut(
+            obj,
+            "Higher Institutions",
+            "Higher Institutions",
+            q,
+            "Higher Institutions Subgroup",
+            "Higher Institutions",
+            store.i18n.locale
+          ).path("jsonrecords");
+          break;
+        case "no_cut":
+          query = setLangCaptions(q, store.i18n.locale).path("jsonrecords");
+          break;
+        case "rd_survey":
+          query = setLangCaptions(q, store.i18n.locale).path("jsonrecords");
+          break;
+      }
+
+      return {
+        key: key,
+        data: __API__ + query
+      };
+    });
 
     return {
       type: "GET_DATA",

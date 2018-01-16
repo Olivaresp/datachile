@@ -203,11 +203,11 @@ class Explore extends Component {
         title = t("Countries");
         break;
       }
-      /*case "institutions": {
+      case "institutions": {
         type = "institutions";
         break;
       }
-      case "careers": {
+      /*case "careers": {
         type = "careers";
         break;
       }*/
