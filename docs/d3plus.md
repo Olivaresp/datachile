@@ -36,6 +36,42 @@ Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`.
 
 
 ## TreemapStacked
-Dentro de Datachile, existen visualizaciones que pueden ser intercambiadas entre `Treemap` y `StackedArea` con el objetivo de visualizar tanto totales como su evolución en el tiempo. Para poder formar esto, se creó el componente `TreemapStacked`, que permite intercambiar de manera simple entre estas dos visualizaciones. El único requisito para que este componente funcione correctamente, es que existan datos de dos o más años diferentes.
+Dentro de Datachile, existen visualizaciones que pueden ser intercambiadas entre `Treemap` y `StackedArea` con el objetivo de visualizar tanto totales como su evolución en el tiempo. Para poder formar esto, se creó el componente `TreemapStacked`, que permite intercambiar de manera simple entre estas dos visualizaciones. 
 
 ![Stack](img/treemapstacked.gif)
+
+El único requisito para que este componente funcione correctamente, es que existan datos de dos o más años diferentes.
+
+```JSX
+
+import TreemapStacked from "components/TreemapStacked";
+
+<TreemapStacked
+    path={path}
+    msrName="Number of visas"
+    drilldowns={["Continent", "Country"]}
+    depth={true}
+    config={{
+        ...
+        total: d => d["Number of visas"],
+        totalConfig: {
+            text: d =>
+                "Total: " +
+                numeral(getNumberFromTotalString(d.text), locale).format(
+                    "0,0"
+                ) +
+                " " +
+                t("visas")
+        }
+        ...
+    }}
+/>
+```
+
+| Propiedad | Tipo | Descripción |
+| --- | --- | --- |
+| path | `string` | List all new or modified files |
+| msrName | `string` | Nombre de `measure` que será usada |
+| drilldowns | `array` | `Array` de `levels` de profundidad que tendrá el `Treemap` |
+| depth | `boolean` | Genera el nivel de detalles presente en `StackedArea` |
+| config | `object` | Añade configuraciones personalizadas al gráfico. |
