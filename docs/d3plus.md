@@ -38,6 +38,21 @@ Más detalles de la documentación de `d3plus` en [Docs](http://d3plus.org/docs/
 ## Utilización en Datachile
 Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`. 
 
+## API call
+Los datos de cada chart son cargados de forma asíncrona. Para manipular estos datos, en cada chart se genera una variable llamada `path`, que contiene la URL desde la cuál se obtienen los datos para la visualización.
+
+Para manipular el formato de los datos de esta URL, se utiliza la propiedad `dataFormat` de d3plus. Un ejemplo de esto sería:
+
+```JSX
+<Treemap
+    config={{...}}
+    dataFormat={data => data.data}
+/>
+```
+
+Si se desea preprocesar los datos, esto se debe hacer dentro de `dataFormat`.
+
+*Como sugerencia, no es recomendable usar `this.setState()` dentro de `dataFormat`, debido a que el rendereo de esta propiedad se hace sólo una vez, y no se vuelve a re-renderear si cambia el `state`.
 
 ## TreemapStacked
 Dentro de Datachile, existen visualizaciones que pueden ser intercambiadas entre `Treemap` y `StackedArea` con el objetivo de visualizar tanto totales como su evolución en el tiempo. Para poder formar esto, se creó el componente `TreemapStacked`, que permite intercambiar de manera simple entre estas dos visualizaciones. 
