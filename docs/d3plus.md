@@ -32,4 +32,4 @@ Más detalles de `d3plus-react` en [Github](https://github.com/d3plus/d3plus-rea
 Más detalles de la documentación de `d3plus` en [Docs](http://d3plus.org/docs/)
 
 ## Utilización en Datachile
-Todas las visualizaciones en Datachile están realizadas
+Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`. 
