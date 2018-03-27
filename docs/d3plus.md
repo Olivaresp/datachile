@@ -53,16 +53,7 @@ import TreemapStacked from "components/TreemapStacked";
     depth={true}
     config={{
         ...
-        total: d => d["Number of visas"],
-        totalConfig: {
-            text: d =>
-                "Total: " +
-                numeral(getNumberFromTotalString(d.text), locale).format(
-                    "0,0"
-                ) +
-                " " +
-                t("visas")
-        }
+        total: d => d["Number of visas"]
         ...
     }}
 />
@@ -70,8 +61,10 @@ import TreemapStacked from "components/TreemapStacked";
 
 | Propiedad | Tipo | Descripción |
 | --- | --- | --- |
-| path | `string` | List all new or modified files |
-| msrName | `string` | Nombre de `measure` que será usada |
+| path | `string` | API call desde donde se obtienen los datos para generar la visualización |
+| msrName | `string` | Nombre de `measure` |
 | drilldowns | `array` | `Array` de `levels` de profundidad que tendrá el `Treemap` |
-| depth | `boolean` | Genera el nivel de detalles presente en `StackedArea` |
+| depth | `boolean` | Permite aumentar el nivel de profundidad presente en `StackedArea` |
 | config | `object` | Añade configuraciones personalizadas al gráfico. |
+
+Si deseas añadir más funcionalidades a este componente, puedes encontrarlo en `app/components/TreemapStacked`.
