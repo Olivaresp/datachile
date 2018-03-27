@@ -6,7 +6,9 @@ La elección de gráficos a utilizar dentro de Datachile, fue producto de un pro
 A continuación detallaremos los criterios de uso de cada tipo de visualización.
 
 ## Treemap
-Su uso está relacionado con el despliegue de datos jerárquicos.
+Su uso está relacionado con el despliegue de datos jerárquicos y por orden de importancia. Es la visualización más usada dentro del website, por su versatilidad y funcionalidad.
+
+Sin embargo, en ningún caso se recomienda su uso si se pretenden filtrar *tuplas* de los datos, dado que se basa en mostrar totales.
 
 ## Bar Chart
 Se realizaron comparaciones basándose en:
