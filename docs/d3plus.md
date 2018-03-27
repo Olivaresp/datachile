@@ -3,7 +3,7 @@
 # Detalles sobre D3Plus - React
 
 ## Introducción
-[D3.js](general.md) es una librería JavaScript para manipular documentos basados en datos. D3 ayuda a contar a los datos usando HTML, SVG y CSS. Basándose en esta librería, D3plus es una librería creada por Datawheel LLC para aprovechar el conjunto de características de D3, al tiempo que proporciona una barrera de entrada bastante baja a los usuarios que no conocen DE código, diseño o visualización de datos.
+[D3.js](general.md) es una librería JavaScript para manipular documentos basados en datos. D3 ayuda a contar a los datos usando HTML, SVG y CSS. Basándose en esta librería, [d3plus.js](http://d3plus.org) es una librería creada por Datawheel LLC para aprovechar el conjunto de características de D3, al tiempo que proporciona una barrera de entrada bastante baja a los usuarios que no conocen DE código, diseño o visualización de datos.
 
 ## D3Plus React
 Una de las principales ventajas de d3plus por sobre otra librería, es la posibilidad de utilizar `d3plus-react`, que entrega todas las visualizaciones de d3plus en forma de componentes React.
@@ -33,3 +33,9 @@ Más detalles de la documentación de `d3plus` en [Docs](http://d3plus.org/docs/
 
 ## Utilización en Datachile
 Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`. 
+
+
+## TreemapStacked
+Dentro de Datachile, existen visualizaciones que pueden ser intercambiadas entre `Treemap` y `StackedArea` con el objetivo de visualizar tanto totales como su evolución en el tiempo. Para poder formar esto, se creó el componente `TreemapStacked`, que permite intercambiar de manera simple entre estas dos visualizaciones. El único requisito para que este componente funcione correctamente, es que existan datos de dos o más años diferentes.
+
+![Stack](img/treemapstacked.gif)
