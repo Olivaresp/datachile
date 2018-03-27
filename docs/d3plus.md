@@ -3,7 +3,7 @@
 # Detalles sobre D3Plus - React
 
 ## Introducción
-[D3.js](general.md) es una librería JavaScript para manipular documentos basados en datos. D3 ayuda a contar a los datos usando HTML, SVG y CSS. Basándose en esta librería, [d3plus.js](http://d3plus.org) es una librería creada por Datawheel LLC para aprovechar el conjunto de características de D3, al tiempo que proporciona una barrera de entrada bastante baja a los usuarios que no conocen DE código, diseño o visualización de datos.
+[D3.js](general.md) es una librería JavaScript para manipular documentos basados en datos. D3 ayuda a contar historias a través de los datos usando HTML, SVG y CSS. Basándose en esta librería, [d3plus.js](http://d3plus.org) es una librería creada por Datawheel LLC para aprovechar el conjunto de características de D3, al tiempo que proporciona una barrera de entrada bastante baja a los usuarios que no conocen de código, diseño o visualización de datos.
 
 ## D3Plus React
 Una de las principales ventajas de d3plus por sobre otra librería, es la posibilidad de utilizar `d3plus-react`, que entrega todas las visualizaciones de d3plus en forma de componentes React.
@@ -27,6 +27,10 @@ const config = {
 
 <Treemap config={config} />
 ```
+
+![Treemap](img/treemap.png)
+
+Ver este ejemplo en [JSfiddle](https://jsfiddle.net/252k2gaa/5/)
 
 Más detalles de `d3plus-react` en [Github](https://github.com/d3plus/d3plus-react/)
 Más detalles de la documentación de `d3plus` en [Docs](http://d3plus.org/docs/)
