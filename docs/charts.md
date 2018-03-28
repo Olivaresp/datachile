@@ -5,7 +5,9 @@ Datachile crea y combina visualizaciones interactivas. Por otra parte, Piensa lo
 
 Para crear un nuevo `chart` en Datachile, es necesario entender algunos conceptos previos. Para esto, explicaremos el funcionamiento de dos librerías que fueron usadas de manera intensiva: `mondrian-rest-client` y `d3plus-react`.
 
-## `mondrian-rest-client`
+## API call y obtención de datos
+
+### `mondrian-rest-client`
 Es un cliente javascript para `mondrian-rest`. Actúa como la capa lógica que conecta los cubos de datos con el cliente.
 
 Más detalles de `mondrian-rest-client` en [Github](https://github.com/Datawheel/mondrian-rest-client)
@@ -17,12 +19,14 @@ Para ejemplificar su uso, se muestra una consulta en el cubo `exports`, donde lo
 
 ```JSX
 import { getLevelObject } from "helpers/dataUtils";
+import { Client as MondrianClient } from "mondrian-rest-client";
+
+const client = new MondrianClient(__API__);
 
 class CustomClass extends Section {
   static need = [
     (params, store) => {
-      const product = getLevelObject(params);
-      const prm = mondrianClient.cube("exports").then(cube => {
+      const prm = client.cube("exports").then(cube => {
         var q = 
           cube.query
             .option("parents", true)
@@ -57,11 +61,11 @@ render() {
 
 En el ejemplo anterior, los datos quedarán disponibles para ser utilizados por los gráficos en la variable `path`.
 
-## Detalles sobre D3Plus - React
+## Frontend
 [D3.js](general.md) es una librería JavaScript para manipular documentos basados en datos. D3 ayuda a contar historias a través de los datos usando HTML, SVG y CSS. Basándose en esta librería, [d3plus.js](http://d3plus.org) es una librería creada por Datawheel LLC para aprovechar el conjunto de características de D3, al tiempo que proporciona una barrera de entrada bastante baja a los usuarios que no conocen de código, diseño o visualización de datos.
 
 ### `d3plus-react`
-Una de las principales ventajas de d3plus por sobre otra librería, es la posibilidad de utilizar `d3plus-react`, que entrega todas las visualizaciones de d3plus en forma de componentes React.
+Una de las principales ventajas de d3plus por sobre otra librería, es la posibilidad de utilizar `d3plus-react`, que entrega todas las visualizaciones de d3plus en forma de componentes React. Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`. 
 
 ```JSX
 import {Treemap} from "d3plus-react";
@@ -91,10 +95,7 @@ Más detalles de `d3plus-react` en [Github](https://github.com/d3plus/d3plus-rea
 
 Más detalles de la documentación de `d3plus` en [Docs](http://d3plus.org/docs/)
 
-## Utilización en Datachile
-Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`. 
-
-## Usando la variable `path`
+### Usando la variable `path`
 Como se detalló anteriormente, los datos de cada chart son cargados de forma asíncrona. Para manipular estos datos, en cada chart se genera una variable llamada `path`, que contiene la URL desde la cuál se obtienen los datos para la visualización.
 
 Para manipular el formato de los datos de esta URL, se utiliza la propiedad `dataFormat` de d3plus, que es una función de formato personalizado que se utiliza para formatear datos de una solicitud AJAX. La función pasará los datos brutos devueltos por la solicitud y se espera que devuelva una matriz de valores que serán usados en el chart.
@@ -102,8 +103,14 @@ Para manipular el formato de los datos de esta URL, se utiliza la propiedad `dat
 Un ejemplo de esto sería:
 
 ```JSX
+import {Treemap} from "d3plus-react";
+
 <Treemap
-    config={{...}}
+    config={
+      {...
+        data: path
+      }
+    }
     dataFormat={data => data.data}
 />
 ```
@@ -112,7 +119,7 @@ Un ejemplo de esto sería:
 
 **Como sugerencia, no es recomendable usar `this.setState()` dentro de `dataFormat`, debido a que el rendereo de esta propiedad se hace sólo una vez, y no se vuelve a re-renderear si cambia el `state`.
 
-## TreemapStacked
+### TreemapStacked
 Dentro de Datachile, existen visualizaciones que pueden ser intercambiadas entre `Treemap` y `StackedArea` con el objetivo de visualizar tanto totales como su evolución en el tiempo. Para poder formar esto, se creó el componente `TreemapStacked`, que permite intercambiar de manera simple entre estas dos visualizaciones. 
 
 ![Stack](img/treemapstacked.gif)
