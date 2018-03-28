@@ -6,26 +6,22 @@ La elección de gráficos a utilizar dentro de Datachile, fue producto de un pro
 A continuación detallaremos los criterios de uso de cada tipo de visualización.
 
 ## Etapas previas
-### Usando needs
+### API call para obtener datos
 La librería `datawheel-canon` incluye el método estático llamado `need`, que permite manipular consultas de manera asincrónica a la API de Datachile. Dentro de cada `need` se realizan queries usando `mondrian-rest-client`. Como resultado de cada query, se genera una URL asincrónica, desde la cuál `d3plus` obtiene los datos.
+
+Para ejemplificar su uso, se muestra una consulta en el cubo `exports`, donde los drilldowns son por Año y País de destino de exportaciones, con una measure de `FOB US`. 
 
 ```JSX
 static need = [
   (params, store) => {
     const product = getLevelObject(params);
     const prm = mondrianClient.cube("exports").then(cube => {
-      var q = levelCut(
-        product,
-        "Export HS",
-        "HS",
+      var q = 
         cube.query
           .option("parents", true)
           .drilldown("Destination Country", "Country", "Country")
           .drilldown("Date", "Date", "Year")
-          .measure("FOB US"),
-        "HS0",
-        "HS2",
-        store.i18n.locale
+          .measure("FOB US")
       );
 
       return {
@@ -43,8 +39,10 @@ static need = [
 ```
 
 En caso de resolverse correctamente la `Promise`, se almacenan los resultados en `this.context.data` usando como acceso el nombre dado a la key. 
+
+Usando `product_exports_by_destination` como la key generada por el `need` nos queda: 
 ```JSX
-const path = this.context.data.key_defined_in_need
+const path = this.context.data.product_exports_by_destination
 ```
 
 
