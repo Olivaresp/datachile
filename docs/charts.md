@@ -1,51 +1,150 @@
 [Volver al índice](general.md)
 
 # Detalles sobre gráficos
-La elección de gráficos a utilizar dentro de Datachile, fue producto de un proceso iterativo con una serie de criterios objetivos.
+Datachile crea y combina visualizaciones interactivas. Por otra parte, Piensa los datos como historias y no como archivos.
 
-A continuación detallaremos los criterios de uso de cada tipo de visualización.
+Para crear un nuevo `chart` en Datachile, es necesario entender algunos conceptos previos. Para esto, explicaremos el funcionamiento de dos librerías que fueron usadas de manera intensiva: `mondrian-rest-client` y `d3plus-react`.
 
-## Etapas previas
-### API call para obtener datos
-La librería `datawheel-canon` incluye el método estático llamado `need`, que permite manipular consultas de manera asincrónica a la API de Datachile. Dentro de cada `need` se realizan queries usando `mondrian-rest-client`. Como resultado de cada query, se genera una URL asincrónica, desde la cuál `d3plus` obtiene los datos.
+## `mondrian-rest-client`
+Es un cliente javascript para `mondrian-rest`. Actúa como la capa lógica que conecta los cubos de datos con el cliente.
+
+Más detalles de `mondrian-rest-client` en [Github](https://github.com/Datawheel/mondrian-rest-client)
+
+### `datawheel-canon` y el método `need`
+La librería `datawheel-canon` incluye el método estático llamado `need`, que permite manipular consultas de manera asincrónica a la API de Datachile. Dentro de cada `need` se realizan queries usando `mondrian-rest-client`. Como resultado de cada query, se genera una URL de forma asincrónica, desde la cuál se obtendrán los datos para el chart.
 
 Para ejemplificar su uso, se muestra una consulta en el cubo `exports`, donde los drilldowns son por Año y País de destino de exportaciones, con una measure de `FOB US`. 
 
 ```JSX
-static need = [
-  (params, store) => {
-    const product = getLevelObject(params);
-    const prm = mondrianClient.cube("exports").then(cube => {
-      var q = 
-        cube.query
-          .option("parents", true)
-          .drilldown("Destination Country", "Country", "Country")
-          .drilldown("Date", "Date", "Year")
-          .measure("FOB US")
-      );
+import { getLevelObject } from "helpers/dataUtils";
+
+class CustomClass extends Section {
+  static need = [
+    (params, store) => {
+      const product = getLevelObject(params);
+      const prm = mondrianClient.cube("exports").then(cube => {
+        var q = 
+          cube.query
+            .option("parents", true)
+            .drilldown("Destination Country", "Country", "Country")
+            .drilldown("Date", "Date", "Year")
+            .measure("FOB US")
+        );
+
+        return {
+          key: "product_exports_by_destination",
+          data: __API__ + q.path("jsonrecords")
+        };
+      });
 
       return {
-        key: "product_exports_by_destination",
-        data: __API__ + q.path("jsonrecords")
+        type: "GET_DATA",
+        promise: prm
       };
-    });
-
-    return {
-      type: "GET_DATA",
-      promise: prm
-    };
-  }
-];
+    }
+  ];
+}
 ```
 
 En caso de resolverse correctamente la `Promise`, se almacenan los resultados en `this.context.data` usando como acceso el nombre dado a la key. 
 
 Usando `product_exports_by_destination` como la key generada por el `need` nos queda: 
 ```JSX
-const path = this.context.data.product_exports_by_destination
+render() {
+  const path = this.context.data.product_exports_by_destination
+}
 ```
 
+En el ejemplo anterior, los datos quedarán disponibles para ser utilizados por los gráficos en la variable `path`.
 
+## Detalles sobre D3Plus - React
+[D3.js](general.md) es una librería JavaScript para manipular documentos basados en datos. D3 ayuda a contar historias a través de los datos usando HTML, SVG y CSS. Basándose en esta librería, [d3plus.js](http://d3plus.org) es una librería creada por Datawheel LLC para aprovechar el conjunto de características de D3, al tiempo que proporciona una barrera de entrada bastante baja a los usuarios que no conocen de código, diseño o visualización de datos.
+
+### `d3plus-react`
+Una de las principales ventajas de d3plus por sobre otra librería, es la posibilidad de utilizar `d3plus-react`, que entrega todas las visualizaciones de d3plus en forma de componentes React.
+
+```JSX
+import {Treemap} from "d3plus-react";
+
+const config = {
+  groupBy: "region",
+  data: [
+    {region: "Biobío", value: 29, year: 2017},
+    {region: "Metropolitana",  value: 10, year: 2017},
+    {region: "Valparaiso",  value: 6, year: 2017},
+    {region: "Biobío", value: 31, year: 2016},
+    {region: "Metropolitana",  value: 12, year: 2016},
+    {region: "Valparaiso",  value: 9, year: 2016}
+  ],
+  size: d => d.value,
+  time: "year"
+};
+
+<Treemap config={config} />
+```
+
+![Treemap](img/treemap.png)
+
+Ver este ejemplo en [JSfiddle](https://jsfiddle.net/252k2gaa/5/)
+
+Más detalles de `d3plus-react` en [Github](https://github.com/d3plus/d3plus-react/)
+
+Más detalles de la documentación de `d3plus` en [Docs](http://d3plus.org/docs/)
+
+## Utilización en Datachile
+Todas las visualizaciones en Datachile están realizadas usando `d3plus-react`. 
+
+## Usando la variable `path`
+Como se detalló anteriormente, los datos de cada chart son cargados de forma asíncrona. Para manipular estos datos, en cada chart se genera una variable llamada `path`, que contiene la URL desde la cuál se obtienen los datos para la visualización.
+
+Para manipular el formato de los datos de esta URL, se utiliza la propiedad `dataFormat` de d3plus, que es una función de formato personalizado que se utiliza para formatear datos de una solicitud AJAX. La función pasará los datos brutos devueltos por la solicitud y se espera que devuelva una matriz de valores que serán usados en el chart.
+
+Un ejemplo de esto sería:
+
+```JSX
+<Treemap
+    config={{...}}
+    dataFormat={data => data.data}
+/>
+```
+
+*Si se desea preprocesar los datos, esto se debe hacer en `dataFormat`.
+
+**Como sugerencia, no es recomendable usar `this.setState()` dentro de `dataFormat`, debido a que el rendereo de esta propiedad se hace sólo una vez, y no se vuelve a re-renderear si cambia el `state`.
+
+## TreemapStacked
+Dentro de Datachile, existen visualizaciones que pueden ser intercambiadas entre `Treemap` y `StackedArea` con el objetivo de visualizar tanto totales como su evolución en el tiempo. Para poder formar esto, se creó el componente `TreemapStacked`, que permite intercambiar de manera simple entre estas dos visualizaciones. 
+
+![Stack](img/treemapstacked.gif)
+
+El único requisito para que este componente funcione correctamente, es que existan datos de dos o más años diferentes.
+
+```JSX
+
+import TreemapStacked from "components/TreemapStacked";
+
+<TreemapStacked
+    path={path}
+    msrName="Number of visas"
+    drilldowns={["Continent", "Country"]}
+    depth={true}
+    config={{
+        ...
+        total: d => d["Number of visas"]
+        ...
+    }}
+/>
+```
+
+| Propiedad | Tipo | Descripción |
+| --- | --- | --- |
+| path | `string` | API call desde donde se obtienen los datos para generar la visualización |
+| msrName | `string` | Nombre de `measure` |
+| drilldowns | `array` | `Array` de `levels` de profundidad que tendrá el `Treemap` |
+| depth | `boolean` | Permite aumentar el nivel de profundidad presente en `StackedArea` |
+| config | `object` | Añade configuraciones personalizadas al gráfico. |
+
+Si deseas añadir más funcionalidades a este componente, puedes encontrarlo en `app/components/TreemapStacked`.
 
 ## Treemap
 Su uso está relacionado con el despliegue de datos jerárquicos y por orden de importancia. Es la visualización más usada dentro del website, por su versatilidad y funcionalidad.
