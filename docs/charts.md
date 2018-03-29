@@ -1,9 +1,9 @@
 [Volver al índice](general.md)
 
 # Detalles sobre gráficos
-Datachile crea y combina visualizaciones interactivas. Por otra parte, Piensa los datos como historias y no como archivos.
+Datachile crea y combina visualizaciones interactivas. Por otra parte, piensa los datos como historias y no como archivos.
 
-Para crear un nuevo `chart` en Datachile, es necesario entender algunos conceptos previos. Para esto, explicaremos el funcionamiento de dos librerías que fueron usadas de manera intensiva: `mondrian-rest-client` y `d3plus-react`.
+Es así como la unidad básica de las visualizaciones son los `charts`. Para crear un nuevo `chart`, es necesario entender algunos conceptos previos, y para esto, explicaremos el funcionamiento de dos librerías que fueron usadas de manera intensiva: `mondrian-rest-client` y `d3plus-react`.
 
 ## API call y obtención de datos
 
@@ -207,4 +207,29 @@ import {Plot} from "d3plus-react";
     sizeMax: 30
   }
 } />
+```
+
+## Crear un gráfico desde cero
+Supongamos que para la sección `Civics` disponemos de nuevos datos que nos permitirán hacer el gráfico de número de denuncias por sexo. Llamaremos a este chart `CrimesBySex`. Para esto, lo primero que se debe hacer es crear el archivo `CrimesBySex` en `app/pages/GeoProfile/crimes/charts`. (Más detalles de las secciones [aquí](profiles.md))
+
+Dentro de `index.jsx` - en este caso referente a `GeoProfile`- debes importar el chart y además se debe agregar a `need`. Si no se agrega el `chart` a `need`, se obtendrá `undefined` como resultado de la API call.
+
+Y luego, puedes agregar el chart donde estimes conveniente en el código.
+
+```JSX
+import CrimesBySex from "app/pages/GeoProfile/crimes/charts/CrimesBySex";
+
+class GeoProfile extends Component {
+  static need = [
+    ...
+    CrimesBySex
+    ...
+  ];
+
+  render() {
+    ...
+    <CrimesBySex className="lost-1" />
+  }
+}
+
 ```
