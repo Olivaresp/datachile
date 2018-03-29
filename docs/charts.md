@@ -214,11 +214,13 @@ Supongamos que para la sección `Crimes` disponemos de nuevos datos que nos perm
 
 Dentro de `index.jsx` - en este caso referente a `GeoProfile`- debes importar el chart y además se debe agregar a `need`. Si no se agrega el `chart` a `need`, se obtendrá `undefined` como resultado de la API call.
 
-Para finalizar, puedes agregar el chart donde estimes conveniente en el código. Para escoger el tamaño del `chart`, debes escoger:
+Para finalizar, puedes agregar el chart donde estimes conveniente en el código. Para escoger el tamaño del `chart`, debes elegir la clase correspondiente, según los siguientes criterios:
 * Full-width: `lost-1`
 * Medium-width: `lost-1-2`
 * 33%-width: `lost-1-3`
 * 66%-width: `lost-2-3`
+
+**Para otros tamaños, puedes leer más sobre [LostGrid](http://lostgrid.org/)
 
 ```JSX
 import CrimesBySex from "app/pages/GeoProfile/crimes/charts/CrimesBySex";
