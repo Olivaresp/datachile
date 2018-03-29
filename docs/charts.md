@@ -210,11 +210,15 @@ import {Plot} from "d3plus-react";
 ```
 
 ## Crear un gráfico desde cero
-Supongamos que para la sección `Civics` disponemos de nuevos datos que nos permitirán hacer el gráfico de número de denuncias por sexo. Llamaremos a este chart `CrimesBySex`. Para esto, lo primero que se debe hacer es crear el archivo `CrimesBySex` en `app/pages/GeoProfile/crimes/charts`. (Más detalles de las secciones [aquí](profiles.md))
+Supongamos que para la sección `Crimes` disponemos de nuevos datos que nos permitirán hacer el gráfico de número de denuncias por sexo. Llamaremos a este chart `CrimesBySex`. Para esto, lo primero que se debe hacer es crear el archivo `CrimesBySex` en `app/pages/GeoProfile/crimes/charts`. (Más detalles de las secciones [aquí](profiles.md))
 
 Dentro de `index.jsx` - en este caso referente a `GeoProfile`- debes importar el chart y además se debe agregar a `need`. Si no se agrega el `chart` a `need`, se obtendrá `undefined` como resultado de la API call.
 
-Y luego, puedes agregar el chart donde estimes conveniente en el código.
+Para finalizar, puedes agregar el chart donde estimes conveniente en el código. Para escoger el tamaño del `chart`, debes escoger:
+* Full-width: `lost-1`
+* Medium-width: `lost-1-2`
+* 33%-width: `lost-1-3`
+* 66%-width: `lost-2-3`
 
 ```JSX
 import CrimesBySex from "app/pages/GeoProfile/crimes/charts/CrimesBySex";
