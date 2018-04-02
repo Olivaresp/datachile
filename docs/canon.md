@@ -71,4 +71,25 @@ locales/
 ```
 Las traducciones que están en uso son almacenadas en un archivo JSON, mientras que las traducciones que estuvieron previamente en uso (desde la última vez que corriste el script) son almacenadas con el sufijo _old. Mientras corres el script, cualquier traducción existente se mantendrá, así que no te preocupes de sobrescribir las traducciones previas.
 
+Luego de finalizado el scrapping, los archivos de ambos idiomas lucirán así:
+
+```JSON
+{
+  "nav": {
+    "about": "",
+    "welcome": ""
+  }
+}
+```
+Si observas el sitio, se mostrarán los `strings` de forma literal, dado que se encuentran vacíos. Un archivo de traducción completo luce así:
+
+```JSON
+{
+  "nav": {
+    "about": "About",
+    "welcome": "Welcome back {{name}}!"
+  }
+}
+```
+Podrás observar que el segundo string contiene una variable rodeada por dos conjuntos de llaves. Esta es la notación para pasar la variable a las cadenas traducidas, y es crucial en la creación de texto de estilo de `mad-libs`.
 
